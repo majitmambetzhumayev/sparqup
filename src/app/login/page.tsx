@@ -33,7 +33,7 @@ export default function LoginPage() {
         router.refresh();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setError('Une erreur est survenue');
     } finally {
       setLoading(false);
@@ -45,12 +45,8 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">
-            SparqUp Admin
-          </h1>
-          <p className="text-neutral-400">
-            Connectez-vous pour accéder au dashboard
-          </p>
+          <h1 className="text-3xl font-bold text-white mb-2">SparqUp Admin</h1>
+          <p className="text-neutral-400">Connectez-vous pour accéder au dashboard</p>
         </div>
 
         {/* Form */}

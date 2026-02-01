@@ -23,12 +23,12 @@ export default function RadioGroup({
   options,
   value,
   onChange,
-  name = 'radio-group'
+  name = 'radio-group',
 }: RadioGroupProps) {
   return (
     <div className="space-y-2 max-w-2xl" role="radiogroup" aria-label={name}>
       {/* ↑ Limite la largeur du groupe */}
-      {options.map((option) => (
+      {options.map(option => (
         <OptionCard
           key={option.id}
           id={option.id}

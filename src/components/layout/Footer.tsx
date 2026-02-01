@@ -11,15 +11,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-heading font-bold text-white mb-4">
-              SparqUp
-            </h3>
+            <h3 className="text-2xl font-heading font-bold text-white mb-4">SparqUp</h3>
             <p className="text-forest-200 mb-6 leading-relaxed">
               Développement web et automatisation pour TPE/PME. Bordeaux.
             </p>
             <div className="flex flex-col gap-3 text-sm">
-              <a 
-                href="mailto:contact@sparqup.fr" 
+              <a
+                href="mailto:contact@sparqup.fr"
                 className="flex items-center gap-2 text-forest-200 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4" />
@@ -37,8 +35,8 @@ export default function Footer() {
             <h4 className="font-semibold text-white mb-4">Solutions</h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link 
-                  href="/services#creation-web" 
+                <Link
+                  href="/services#creation-web"
                   className="text-forest-200 hover:text-white transition-colors inline-flex items-center gap-1 group"
                 >
                   Création de sites web
@@ -46,8 +44,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/services#automatisation" 
+                <Link
+                  href="/services#automatisation"
                   className="text-forest-200 hover:text-white transition-colors inline-flex items-center gap-1 group"
                 >
                   Automatisation
@@ -55,8 +53,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/services#contenu" 
+                <Link
+                  href="/services#contenu"
                   className="text-forest-200 hover:text-white transition-colors inline-flex items-center gap-1 group"
                 >
                   Production de contenu
@@ -64,8 +62,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/services#connexion-outils" 
+                <Link
+                  href="/services#connexion-outils"
                   className="text-forest-200 hover:text-white transition-colors inline-flex items-center gap-1 group"
                 >
                   Connexion d&apos;outils
@@ -73,8 +71,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/services#digitalisation" 
+                <Link
+                  href="/services#digitalisation"
                   className="text-forest-200 hover:text-white transition-colors inline-flex items-center gap-1 group"
                 >
                   Digitalisation complète
@@ -82,8 +80,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/services#projet-technique" 
+                <Link
+                  href="/services#projet-technique"
                   className="text-forest-200 hover:text-white transition-colors inline-flex items-center gap-1 group"
                 >
                   Projets techniques
@@ -97,18 +95,17 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-4">Entreprise</h4>
             <ul className="space-y-3 text-sm">
-
               <li>
-                <Link 
-                  href="/realisations" 
+                <Link
+                  href="/realisations"
                   className="text-forest-200 hover:text-white transition-colors"
                 >
                   Réalisations
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   className="text-forest-200 hover:text-white transition-colors"
                 >
                   Contact
@@ -130,16 +127,16 @@ export default function Footer() {
             <h4 className="font-semibold text-white mb-4 mt-8">Légal</h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link 
-                  href="/mentions-legales" 
+                <Link
+                  href="/mentions-legales"
                   className="text-forest-200 hover:text-white transition-colors"
                 >
                   Mentions légales
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/politique-confidentialite" 
+                <Link
+                  href="/politique-confidentialite"
                   className="text-forest-200 hover:text-white transition-colors"
                 >
                   Politique de confidentialité
@@ -151,12 +148,9 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-forest-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-forest-300">
+          <p>© {currentYear} SparqUp · Développement web Bordeaux</p>
           <p>
-            © {currentYear} SparqUp · Développement web Bordeaux
-          </p>
-          <p>
-            Conçu et développé par{' '}
-            <span className="text-white font-medium">Majit Morosetti</span>
+            Conçu et développé par <span className="text-white font-medium">Majit Morosetti</span>
           </p>
         </div>
       </div>

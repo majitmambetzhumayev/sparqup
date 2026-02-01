@@ -17,7 +17,7 @@ export function calculateComplexityScore(state: QuestionnaireState): number {
     refonte: 15,
     plateforme: 40,
     tech: 60,
-    conseil: 5
+    conseil: 5,
   };
 
   if (state.projectType) {
@@ -35,7 +35,7 @@ export function calculateComplexityScore(state: QuestionnaireState): number {
       ...FEATURES.vente,
       ...FEATURES.reservation,
       ...FEATURES.automation,
-      ...FEATURES.advanced
+      ...FEATURES.advanced,
     ];
 
     const feature = allFeatures.find(f => f.id === featureId);

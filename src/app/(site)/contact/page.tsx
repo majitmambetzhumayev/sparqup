@@ -17,7 +17,7 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     const toastId = toast.loading('Envoi en cours...');
 
     if (!consent) {
@@ -33,14 +33,14 @@ export default function ContactPage() {
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
-      message: formData.get('message')
+      message: formData.get('message'),
     };
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
@@ -50,7 +50,7 @@ export default function ContactPage() {
         form.reset();
         setConsent(false);
       } else {
-        toast.error('Erreur lors de l\'envoi. Réessayez.', {
+        toast.error("Erreur lors de l'envoi. Réessayez.", {
           id: toastId,
         });
       }
@@ -66,14 +66,9 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageHeader
-                      title="Nous contacter"
-                      subtitle="Une question ? Un projet ? Parlons-en."
-                    />
+      <PageHeader title="Nous contacter" subtitle="Une question ? Un projet ? Parlons-en." />
       <Container size="md">
-        
         <div className="max-w-2xl mx-auto pt-20 px-4">
-
           <div className="bg-white rounded-2xl border-2 border-neutral-200 p-8 mb-6">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -105,7 +100,10 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-neutral-950 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-neutral-950 mb-2"
+                >
                   Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -124,13 +122,13 @@ export default function ContactPage() {
                   <input
                     type="checkbox"
                     checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
+                    onChange={e => setConsent(e.target.checked)}
                     className="mt-1 w-5 h-5 rounded border-neutral-300 text-neutral-900 focus:ring-2 focus:ring-neutral-900"
                     required
                   />
                   <span className="text-sm text-neutral-700 leading-relaxed">
-                    J&apos;accepte que mes données soient utilisées pour me recontacter concernant ma demande. 
-                    Vos données sont traitées conformément à notre{' '}
+                    J&apos;accepte que mes données soient utilisées pour me recontacter concernant
+                    ma demande. Vos données sont traitées conformément à notre{' '}
                     <Link href="/legal/privacy" className="underline hover:text-neutral-900">
                       politique de confidentialité
                     </Link>
@@ -156,10 +154,7 @@ export default function ContactPage() {
             <p className="text-sm text-forest-400 mb-3">
               💡 <strong>Pour un devis précis :</strong> Simulez votre projet en 5 minutes
             </p>
-            <Button
-              variant="secondary"
-              onClick={() => open()}
-            >
+            <Button variant="secondary" onClick={() => open()}>
               Accéder au questionnaire →
             </Button>
           </div>

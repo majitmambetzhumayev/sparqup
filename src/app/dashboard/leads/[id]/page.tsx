@@ -25,7 +25,6 @@ export default function EditLeadPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-
   const fetchLead = useCallback(async () => {
     const res = await fetch(`/api/leads/${id}`);
     if (res.ok) {
@@ -34,7 +33,7 @@ export default function EditLeadPage() {
     }
     setLoading(false);
   }, [id]);
-  
+
   useEffect(() => {
     fetchLead();
   }, [fetchLead]);
@@ -77,10 +76,7 @@ export default function EditLeadPage() {
   return (
     <div className="max-w-3xl">
       <div className="flex items-center gap-4 mb-8">
-        <button
-          onClick={() => router.back()}
-          className="text-neutral-400 hover:text-white"
-        >
+        <button onClick={() => router.back()} className="text-neutral-400 hover:text-white">
           ← Retour
         </button>
         <h1 className="text-3xl font-bold text-white">Éditer le lead</h1>
@@ -89,54 +85,46 @@ export default function EditLeadPage() {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Nom */}
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Nom *
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Nom *</label>
           <input
             type="text"
             required
             value={lead.name}
-            onChange={(e) => setLead({ ...lead, name: e.target.value })}
+            onChange={e => setLead({ ...lead, name: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           />
         </div>
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Email *
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Email *</label>
           <input
             type="email"
             required
             value={lead.email}
-            onChange={(e) => setLead({ ...lead, email: e.target.value })}
+            onChange={e => setLead({ ...lead, email: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           />
         </div>
 
         {/* Téléphone */}
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Téléphone
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Téléphone</label>
           <input
             type="tel"
             value={lead.phone || ''}
-            onChange={(e) => setLead({ ...lead, phone: e.target.value })}
+            onChange={e => setLead({ ...lead, phone: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           />
         </div>
 
         {/* Entreprise */}
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Entreprise
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Entreprise</label>
           <input
             type="text"
             value={lead.company || ''}
-            onChange={(e) => setLead({ ...lead, company: e.target.value })}
+            onChange={e => setLead({ ...lead, company: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           />
         </div>
@@ -149,19 +137,17 @@ export default function EditLeadPage() {
           <textarea
             rows={4}
             value={lead.project_description || ''}
-            onChange={(e) => setLead({ ...lead, project_description: e.target.value })}
+            onChange={e => setLead({ ...lead, project_description: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none resize-none"
           />
         </div>
 
         {/* Budget */}
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Budget
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Budget</label>
           <select
             value={lead.budget_range || ''}
-            onChange={(e) => setLead({ ...lead, budget_range: e.target.value })}
+            onChange={e => setLead({ ...lead, budget_range: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           >
             <option value="">Non spécifié</option>
@@ -174,12 +160,10 @@ export default function EditLeadPage() {
 
         {/* Status */}
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Statut
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Statut</label>
           <select
             value={lead.status}
-            onChange={(e) => setLead({ ...lead, status: e.target.value })}
+            onChange={e => setLead({ ...lead, status: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           >
             <option value="new">Nouveau</option>
@@ -192,9 +176,7 @@ export default function EditLeadPage() {
 
         {/* Source (read-only) */}
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Source
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Source</label>
           <input
             type="text"
             value={lead.source}

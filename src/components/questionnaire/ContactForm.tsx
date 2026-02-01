@@ -22,9 +22,9 @@ export default function ContactForm({ onSubmit, isLoading }: ContactFormProps) {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema)
+    resolver: zodResolver(contactSchema),
   });
 
   const description = watch('description') || '';
@@ -110,10 +110,8 @@ export default function ContactForm({ onSubmit, isLoading }: ContactFormProps) {
             J&apos;accepte d&apos;être recontacté par SparqUp concernant mon projet{' '}
             <span className="text-red-500">*</span>
           </label>
-          {errors.consent && (
-            <p className="text-sm text-red-600 mt-1">{errors.consent.message}</p>
-          )}
-          
+          {errors.consent && <p className="text-sm text-red-600 mt-1">{errors.consent.message}</p>}
+
           <a
             href="/confidentialite"
             target="_blank"

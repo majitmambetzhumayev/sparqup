@@ -16,9 +16,7 @@ export function UsersList({ users }: { users: User[] }) {
 
   const updateRole = async (userId: number, newRole: string) => {
     // Optimistic update
-    setOptimisticUsers(prev =>
-      prev.map(u => u.id === userId ? { ...u, role: newRole } : u)
-    );
+    setOptimisticUsers(prev => prev.map(u => (u.id === userId ? { ...u, role: newRole } : u)));
 
     try {
       const response = await fetch(`/api/users/${userId}`, {
@@ -43,21 +41,29 @@ export function UsersList({ users }: { users: User[] }) {
       <table className="w-full">
         <thead className="bg-neutral-800">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Nom</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Email</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Rôle</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Créé le</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+              Nom
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+              Email
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+              Rôle
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+              Créé le
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-neutral-800">
-          {optimisticUsers.map((user) => (
+          {optimisticUsers.map(user => (
             <tr key={user.id} className="hover:bg-neutral-800/50 transition">
               <td className="px-6 py-4 text-sm text-white">{user.name}</td>
               <td className="px-6 py-4 text-sm text-neutral-300">{user.email}</td>
               <td className="px-6 py-4 text-sm">
                 <select
                   value={user.role}
-                  onChange={(e) => updateRole(user.id, e.target.value)}
+                  onChange={e => updateRole(user.id, e.target.value)}
                   className="px-3 py-1 bg-neutral-800 border border-neutral-700 rounded text-white text-sm"
                 >
                   <option value="viewer">Viewer</option>

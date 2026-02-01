@@ -4,7 +4,11 @@
 import { useState, useEffect } from 'react';
 import QuestionCard from '../QuestionCard';
 import RadioGroup, { RadioOption } from '../inputs/RadioGroup';
-import { TIMELINE_OPTIONS, BUDGET_OPTIONS_TPE, BUDGET_OPTIONS_TECH } from '@/lib/questionnaire/constants';
+import {
+  TIMELINE_OPTIONS,
+  BUDGET_OPTIONS_TPE,
+  BUDGET_OPTIONS_TECH,
+} from '@/lib/questionnaire/constants';
 import { Timeline, Budget } from '@/lib/questionnaire/types';
 
 interface Q5TimelineBudgetProps {
@@ -20,7 +24,7 @@ export default function Q5TimelineBudget({
   budget,
   onTimelineChange,
   onBudgetChange,
-  budgetType = 'tpe'
+  budgetType = 'tpe',
 }: Q5TimelineBudgetProps) {
   const [selectedTimeline, setSelectedTimeline] = useState<string | null>(timeline);
   const [selectedBudget, setSelectedBudget] = useState<string | null>(budget);
@@ -40,27 +44,33 @@ export default function Q5TimelineBudget({
   const timelineOptions: RadioOption[] = TIMELINE_OPTIONS.map(opt => ({
     id: opt.id,
     label: opt.label,
-    description: opt.description
+    description: opt.description,
   }));
 
   const budgetOptionsSource = budgetType === 'tech' ? BUDGET_OPTIONS_TECH : BUDGET_OPTIONS_TPE;
   const budgetOptions: RadioOption[] = budgetOptionsSource.map(opt => ({
     id: opt.id,
-    label: opt.label
+    label: opt.label,
   }));
 
   const getTip = () => {
-    if (selectedTimeline === 'fast' && selectedBudget && ['<2000', '2000-5000'].includes(selectedBudget)) {
+    if (
+      selectedTimeline === 'fast' &&
+      selectedBudget &&
+      ['<2000', '2000-5000'].includes(selectedBudget)
+    ) {
       return {
-        message: '⚠️ Timeline rapide + budget limité : le scope devra être réduit pour tenir les délais.',
-        type: 'warning' as const
+        message:
+          '⚠️ Timeline rapide + budget limité : le scope devra être réduit pour tenir les délais.',
+        type: 'warning' as const,
       };
     }
 
     if (budgetType === 'tpe' && selectedBudget === '<2000') {
       return {
-        message: '💡 Pour ce budget, je recommande un site vitrine simple. Les fonctionnalités avancées nécessitent un budget supérieur.',
-        type: 'info' as const
+        message:
+          '💡 Pour ce budget, je recommande un site vitrine simple. Les fonctionnalités avancées nécessitent un budget supérieur.',
+        type: 'info' as const,
       };
     }
 

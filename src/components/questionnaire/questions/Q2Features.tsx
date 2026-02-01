@@ -32,8 +32,8 @@ export default function Q2Features({ value, onChange, projectType }: Q2FeaturesP
       features: FEATURES.essentials.map(f => ({
         id: f.id,
         label: f.label,
-        description: f.description
-      }))
+        description: f.description,
+      })),
     });
 
     // Section Vente (seulement pour e-commerce)
@@ -44,8 +44,8 @@ export default function Q2Features({ value, onChange, projectType }: Q2FeaturesP
         features: FEATURES.vente.map(f => ({
           id: f.id,
           label: f.label,
-          description: f.description
-        }))
+          description: f.description,
+        })),
       });
     }
 
@@ -57,8 +57,8 @@ export default function Q2Features({ value, onChange, projectType }: Q2FeaturesP
         features: FEATURES.reservation.map(f => ({
           id: f.id,
           label: f.label,
-          description: f.description
-        }))
+          description: f.description,
+        })),
       });
     }
 
@@ -69,8 +69,8 @@ export default function Q2Features({ value, onChange, projectType }: Q2FeaturesP
       features: FEATURES.automation.map(f => ({
         id: f.id,
         label: f.label,
-        description: f.description
-      }))
+        description: f.description,
+      })),
     });
 
     // Section Avancé (toujours affichée)
@@ -80,8 +80,8 @@ export default function Q2Features({ value, onChange, projectType }: Q2FeaturesP
       features: FEATURES.advanced.map(f => ({
         id: f.id,
         label: f.label,
-        description: f.description
-      }))
+        description: f.description,
+      })),
     });
 
     return sections;
@@ -101,14 +101,15 @@ export default function Q2Features({ value, onChange, projectType }: Q2FeaturesP
     if (selectedFeatures.length === 0) {
       return {
         message: '⚠️ Sélectionnez au moins une fonctionnalité pour continuer',
-        type: 'warning' as const
+        type: 'warning' as const,
       };
     }
-    
+
     if (selectedFeatures.length > 8) {
       return {
-        message: '💡 Votre projet semble complexe. Je vous recommanderai un accompagnement sur-mesure.',
-        type: 'info' as const
+        message:
+          '💡 Votre projet semble complexe. Je vous recommanderai un accompagnement sur-mesure.',
+        type: 'info' as const,
       };
     }
 
@@ -127,7 +128,7 @@ export default function Q2Features({ value, onChange, projectType }: Q2FeaturesP
       spacing="compact"
     >
       <div className="space-y-8">
-        {visibleSections.map((section) => (
+        {visibleSections.map(section => (
           <div key={section.id}>
             {/* Section title */}
             <h3 className="text-2xl font-bold text-neutral-950 mb-3 flex items-center gap-2">
@@ -145,16 +146,14 @@ export default function Q2Features({ value, onChange, projectType }: Q2FeaturesP
 
         {/* Option "Autre" */}
         <div>
-          <h3 className="text-lg font-bold text-neutral-950 mb-4">
-            ✍️ Autre
-          </h3>
+          <h3 className="text-lg font-bold text-neutral-950 mb-4">✍️ Autre</h3>
           <CheckboxGroup
             options={[
               {
                 id: 'other',
-                label: 'Autre besoin (précisez dans l\'étape contact)',
-                description: 'Fonctionnalité spécifique non listée'
-              }
+                label: "Autre besoin (précisez dans l'étape contact)",
+                description: 'Fonctionnalité spécifique non listée',
+              },
             ]}
             value={selectedFeatures}
             onChange={setSelectedFeatures}

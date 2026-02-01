@@ -16,11 +16,7 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(
     };
 
     return (
-      <div
-        ref={ref}
-        className={cn(sizes[size], 'mx-auto', className)}
-        {...props}
-      >
+      <div ref={ref} className={cn(sizes[size], 'mx-auto', className)} {...props}>
         {children}
       </div>
     );

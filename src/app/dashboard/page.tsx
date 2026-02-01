@@ -38,10 +38,10 @@ export default function DashboardPage() {
 
       const stats = {
         total: leads.length,
-        new: leads.filter((l) => l.status === 'new').length,
-        contacted: leads.filter((l) => l.status === 'contacted').length,
-        qualified: leads.filter((l) => l.status === 'qualified').length,
-        converted: leads.filter((l) => l.status === 'converted').length,
+        new: leads.filter(l => l.status === 'new').length,
+        contacted: leads.filter(l => l.status === 'contacted').length,
+        qualified: leads.filter(l => l.status === 'qualified').length,
+        converted: leads.filter(l => l.status === 'converted').length,
       };
 
       setStats(stats);

@@ -32,7 +32,7 @@ export default function SignupPage() {
       const result = await response.json();
 
       if (!response.ok) {
-        setError(result.error || 'Erreur lors de l\'inscription');
+        setError(result.error || "Erreur lors de l'inscription");
         return;
       }
 
@@ -50,12 +50,8 @@ export default function SignupPage() {
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">
-            Créer un compte
-          </h1>
-          <p className="text-neutral-400">
-            Inscrivez-vous pour accéder au dashboard
-          </p>
+          <h1 className="text-3xl font-bold text-white mb-2">Créer un compte</h1>
+          <p className="text-neutral-400">Inscrivez-vous pour accéder au dashboard</p>
         </div>
 
         {/* Form */}
@@ -107,9 +103,7 @@ export default function SignupPage() {
                 className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-forest-500 focus:border-transparent"
                 placeholder="••••••••"
               />
-              <p className="text-xs text-neutral-500 mt-1">
-                Minimum 8 caractères
-              </p>
+              <p className="text-xs text-neutral-500 mt-1">Minimum 8 caractères</p>
             </div>
           </div>
 

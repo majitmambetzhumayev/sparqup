@@ -3,7 +3,7 @@ import { HTMLAttributes, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  variant?: 'default' | 'outline' | 'primary' | 'success' | 'warning';  // ← Ajoute les variants manquants
+  variant?: 'default' | 'outline' | 'primary' | 'success' | 'warning'; // ← Ajoute les variants manquants
 }
 
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(

@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import QuestionCard from '../QuestionCard';
-import EstimationCard from '../EstimationCard'; ;
+import EstimationCard from '../EstimationCard';
 import ContactForm from '../ContactForm';
 import { Estimation, ContactData } from '@/lib/questionnaire/types';
 
@@ -34,8 +34,7 @@ export default function Q6Estimation({ estimation, onSubmit }: Q6EstimationProps
       <div className="space-y-10">
         {/* Estimation */}
 
-          <EstimationCard estimation={estimation} />
-
+        <EstimationCard estimation={estimation} />
 
         {/* Contact Form */}
         <div>
@@ -45,10 +44,7 @@ export default function Q6Estimation({ estimation, onSubmit }: Q6EstimationProps
           <p className="text-neutral-600 mb-6">
             Je l&apos;affine et je vous recontacte sous 24h avec des recommandations personnalisées
           </p>
-          <ContactForm
-            onSubmit={handleSubmit}
-            isLoading={isSubmitting}
-          />
+          <ContactForm onSubmit={handleSubmit} isLoading={isSubmitting} />
         </div>
       </div>
     </QuestionCard>

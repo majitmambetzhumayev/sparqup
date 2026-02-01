@@ -41,7 +41,7 @@ export async function GET(request: Request) {
         AND (${source}::text IS NULL OR source = ${source})
       ORDER BY created_at DESC
     `;
-    
+
     return NextResponse.json(leads);
   } catch (error) {
     console.error('GET leads error:', error);

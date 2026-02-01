@@ -14,17 +14,13 @@ type User = {
 
 export default async function UsersPage() {
   const session = await auth();
-  
+
   if (!session || session.user.role !== 'superuser') {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">
-            🔒 Accès refusé
-          </h1>
-          <p className="text-neutral-400">
-            Seuls les superusers peuvent gérer les utilisateurs.
-          </p>
+          <h1 className="text-2xl font-bold text-white mb-4">🔒 Accès refusé</h1>
+          <p className="text-neutral-400">Seuls les superusers peuvent gérer les utilisateurs.</p>
         </div>
       </div>
     );

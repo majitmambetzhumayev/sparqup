@@ -20,19 +20,15 @@ export default function Q1TypeProject({ value, onNext }: Q1TypeProjectProps) {
     id: type.id,
     label: type.label,
     description: type.description,
-    icon: <span>{type.icon}</span>
+    icon: <span>{type.icon}</span>,
   }));
 
   return (
-    <QuestionCard
-      title="Quel type de projet avez-vous ?"
-      width="narrow"
-      spacing="compact"
-    >
+    <QuestionCard title="Quel type de projet avez-vous ?" width="narrow" spacing="compact">
       <RadioGroup
         options={options}
         value={selectedType}
-        onChange={(id) => {
+        onChange={id => {
           setSelectedType(id);
           const selected = PROJECT_TYPES.find(t => t.id === id);
           if (selected) {

@@ -26,28 +26,30 @@ export default function Q4Tools({ value, onChange }: Q4ToolsProps) {
     { id: 'automation', title: '🔗 Automatisation', tools: TOOLS.automation },
     { id: 'booking', title: '📅 Réservation & Planning', tools: TOOLS.booking },
     { id: 'social', title: '📱 Social Media', tools: TOOLS.social },
-    { id: 'none', title: '❌ Aucun outil', tools: TOOLS.none }
+    { id: 'none', title: '❌ Aucun outil', tools: TOOLS.none },
   ];
 
   const getTip = () => {
     if (selectedTools.length === 0) {
       return {
         message: '⚠️ Sélectionnez au moins un outil, ou cochez "Je n\'utilise aucun de ces outils"',
-        type: 'warning' as const
+        type: 'warning' as const,
       };
     }
 
     if (selectedTools.includes('none')) {
       return {
-        message: '💡 Je vous recommanderai les outils adaptés à votre activité lors de l\'estimation.',
-        type: 'info' as const
+        message:
+          "💡 Je vous recommanderai les outils adaptés à votre activité lors de l'estimation.",
+        type: 'info' as const,
       };
     }
 
     if (selectedTools.length >= 6) {
       return {
-        message: '⚡ Écosystème riche ! Je pourrai connecter tous ces outils pour créer des automatisations puissantes.',
-        type: 'info' as const
+        message:
+          '⚡ Écosystème riche ! Je pourrai connecter tous ces outils pour créer des automatisations puissantes.',
+        type: 'info' as const,
       };
     }
 
@@ -66,17 +68,15 @@ export default function Q4Tools({ value, onChange }: Q4ToolsProps) {
       spacing="compact"
     >
       <div className="space-y-8">
-        {sections.map((section) => {
+        {sections.map(section => {
           const options: CheckboxOption[] = section.tools.map(tool => ({
             id: tool.id,
-            label: tool.label
+            label: tool.label,
           }));
 
           return (
             <div key={section.id}>
-              <h3 className="text-lg font-bold text-neutral-950 mb-4">
-                {section.title}
-              </h3>
+              <h3 className="text-lg font-bold text-neutral-950 mb-4">{section.title}</h3>
               <CheckboxGroup
                 options={options}
                 value={selectedTools}

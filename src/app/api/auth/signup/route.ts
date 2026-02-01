@@ -9,10 +9,7 @@ export async function POST(request: Request) {
 
     // Validation
     if (!name || !email || !password) {
-      return NextResponse.json(
-        { error: 'Tous les champs sont requis' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Tous les champs sont requis' }, { status: 400 });
     }
 
     if (password.length < 8) {
@@ -28,10 +25,7 @@ export async function POST(request: Request) {
     `;
 
     if (existing.length > 0) {
-      return NextResponse.json(
-        { error: 'Cet email est déjà utilisé' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Cet email est déjà utilisé' }, { status: 400 });
     }
 
     // Hash le mot de passe
@@ -44,15 +38,9 @@ export async function POST(request: Request) {
       RETURNING id, email, name, role, created_at
     `;
 
-    return NextResponse.json(
-      { success: true, user: result[0] },
-      { status: 201 }
-    );
+    return NextResponse.json({ success: true, user: result[0] }, { status: 201 });
   } catch (error) {
     console.error('Signup error:', error);
-    return NextResponse.json(
-      { error: 'Erreur lors de la création du compte' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Erreur lors de la création du compte' }, { status: 500 });
   }
 }

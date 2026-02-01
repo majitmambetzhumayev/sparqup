@@ -8,8 +8,7 @@ import { z } from 'zod';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-type QuestionnaireData = z.infer<typeof questionnaireSchema>
-
+type QuestionnaireData = z.infer<typeof questionnaireSchema>;
 
 export async function submitQuestionnaire(data: QuestionnaireData) {
   try {
@@ -22,7 +21,7 @@ export async function submitQuestionnaire(data: QuestionnaireData) {
       company: validated.contact.company,
       project_description: generateProjectDescription(validated),
       budget_range: getBudgetRange(validated.budget),
-      source: 'questionnaire'
+      source: 'questionnaire',
     };
 
     const result = await sql`
@@ -41,7 +40,7 @@ export async function submitQuestionnaire(data: QuestionnaireData) {
       from: fromEmail, // ✅ contact@sparqup.fr
       to: validated.contact.email, // ✅ N'importe quel email
       subject: '✓ Demande reçue — Estimation sous 24h',
-      html: generateConfirmationEmail(validated)
+      html: generateConfirmationEmail(validated),
     });
 
     if (confirmationEmail.error) {
@@ -62,7 +61,7 @@ export async function submitQuestionnaire(data: QuestionnaireData) {
       to: process.env.RESEND_TO_EMAIL!,
       replyTo: validated.contact.email, // ✅ Pour répondre facilement
       subject: `🔔 Nouveau lead: ${validated.contact.company}`,
-      html: generateNotificationEmail(validated)
+      html: generateNotificationEmail(validated),
     });
 
     if (notificationEmail.error) {
@@ -71,10 +70,9 @@ export async function submitQuestionnaire(data: QuestionnaireData) {
     }
 
     return { success: true };
-
   } catch (error) {
     console.error('❌ Erreur submission:', error);
-    throw new Error('Erreur lors de l\'envoi. Veuillez réessayer.');
+    throw new Error("Erreur lors de l'envoi. Veuillez réessayer.");
   }
 }
 
@@ -89,49 +87,61 @@ function generateProjectDescription(data: QuestionnaireData): string {
     refonte: 'Refonte de site',
     plateforme: 'Plateforme / App web',
     tech: 'Projet technique',
-    conseil: 'Conseil'
+    conseil: 'Conseil',
   };
 
   let description = `Type: ${projectTypeLabels[data.projectType]}\n`;
-  
+
   if (data.branch === 'tpe') {
     description += `Fonctionnalités: ${data.features.join(', ')}\n`;
     description += `Assets: ${data.assets.join(', ')}\n`;
     description += `Outils: ${data.tools.join(', ')}\n`;
     description += `Timeline: ${data.timeline}\n`;
   }
-  
+
   if (data.branch === 'tech' && data.techNature) {
     description += `Nature: ${data.techNature}\n`;
   }
-  
+
   if (data.branch === 'conseil' && data.conseilObjectives) {
     description += `Objectifs: ${data.conseilObjectives.join(', ')}\n`;
   }
-  
+
   if (data.contact.sector) {
     description += `Secteur: ${data.contact.sector}\n`;
   }
-  
+
   if (data.contact.description) {
     description += `\nDescription:\n${data.contact.description}`;
   }
-  
+
   return description;
 }
 
 // ============================================
 // Helper pour mapper le budget
 // ============================================
-type Budget = 
-  | '<2000' | '2000-5000' | '5000-10000' | '10000-20000' | '>20000' 
-  | '5000-15000' | '15000-30000' | '30000-50000' | '>50000'
-  | '<3000' | '3000-10000' | '>10000'
-  | 'tbd' | 'unknown' | null | undefined ;
+type Budget =
+  | '<2000'
+  | '2000-5000'
+  | '5000-10000'
+  | '10000-20000'
+  | '>20000'
+  | '5000-15000'
+  | '15000-30000'
+  | '30000-50000'
+  | '>50000'
+  | '<3000'
+  | '3000-10000'
+  | '>10000'
+  | 'tbd'
+  | 'unknown'
+  | null
+  | undefined;
 
 function getBudgetRange(budget: Budget): string {
   if (!budget) return 'non spécifié';
-  
+
   const budgetMap: Record<string, string> = {
     '<2000': '0-2k',
     '2000-5000': '2-5k',
@@ -145,10 +155,10 @@ function getBudgetRange(budget: Budget): string {
     '<3000': '0-3k',
     '3000-10000': '3-10k',
     '>10000': '10k+',
-    'tbd': 'à définir',
-    'unknown': 'inconnu'
+    tbd: 'à définir',
+    unknown: 'inconnu',
   };
-  
+
   return budgetMap[budget] || budget;
 }
 
@@ -156,7 +166,7 @@ function getBudgetRange(budget: Budget): string {
 // Templates emails
 // ============================================
 
-function generateConfirmationEmail(data: QuestionnaireData ): string {
+function generateConfirmationEmail(data: QuestionnaireData): string {
   const projectTypeLabels: Record<string, string> = {
     vitrine: 'Site vitrine',
     ecommerce: 'Site e-commerce',
@@ -164,7 +174,7 @@ function generateConfirmationEmail(data: QuestionnaireData ): string {
     refonte: 'Refonte de site',
     plateforme: 'Plateforme / App web',
     tech: 'Projet technique',
-    conseil: 'Conseil'
+    conseil: 'Conseil',
   };
 
   return `
@@ -316,7 +326,9 @@ function generateConfirmationEmail(data: QuestionnaireData ): string {
               <div class="summary-label">Type de projet</div>
               <div class="summary-value">${projectTypeLabels[data.projectType]}</div>
             </div>
-            ${data.branch === 'tpe' ? `
+            ${
+              data.branch === 'tpe'
+                ? `
               <div class="summary-row">
                 <div class="summary-label">Fonctionnalités</div>
                 <div class="summary-value">${data.features.length} sélectionnée(s)</div>
@@ -329,7 +341,9 @@ function generateConfirmationEmail(data: QuestionnaireData ): string {
                 <div class="summary-label">Budget estimé</div>
                 <div class="summary-value">${getBudgetLabel(data.budget)}</div>
               </div>
-            ` : ''}
+            `
+                : ''
+            }
             <div class="summary-row">
               <div class="summary-label">Entreprise</div>
               <div class="summary-value">${data.contact.company}</div>
@@ -373,7 +387,7 @@ function generateConfirmationEmail(data: QuestionnaireData ): string {
   `;
 }
 
-function generateNotificationEmail(data: QuestionnaireData ): string {
+function generateNotificationEmail(data: QuestionnaireData): string {
   const projectTypeLabels: Record<string, string> = {
     vitrine: 'Site vitrine',
     ecommerce: 'Site e-commerce',
@@ -381,7 +395,7 @@ function generateNotificationEmail(data: QuestionnaireData ): string {
     refonte: 'Refonte',
     plateforme: 'Plateforme',
     tech: 'Projet technique',
-    conseil: 'Conseil'
+    conseil: 'Conseil',
   };
 
   return `
@@ -505,22 +519,30 @@ function generateNotificationEmail(data: QuestionnaireData ): string {
               <div class="label">Email</div>
               <div class="value"><a href="mailto:${data.contact.email}" style="color: #171717; text-decoration: none;">${data.contact.email}</a></div>
             </div>
-            ${data.contact.phone ? `
+            ${
+              data.contact.phone
+                ? `
               <div class="row">
                 <div class="label">Téléphone</div>
                 <div class="value">${data.contact.phone}</div>
               </div>
-            ` : ''}
+            `
+                : ''
+            }
             <div class="row">
               <div class="label">Entreprise</div>
               <div class="value">${data.contact.company}</div>
             </div>
-            ${data.contact.sector ? `
+            ${
+              data.contact.sector
+                ? `
               <div class="row">
                 <div class="label">Secteur</div>
                 <div class="value">${data.contact.sector}</div>
               </div>
-            ` : ''}
+            `
+                : ''
+            }
           </div>
 
           <div class="section">
@@ -532,17 +554,23 @@ function generateNotificationEmail(data: QuestionnaireData ): string {
             <div class="row">
               <div class="label">Timeline</div>
               <div class="value">
-                ${'timeline' in data ? `<tr><td>Timeline:</td><td>${data.timeline}</td></tr>` : '' }
-                ${'timeline' in data ? data.timeline === 'fast' ? '<span class="badge urgent">Urgent</span>' : '' : ''}
+                ${'timeline' in data ? `<tr><td>Timeline:</td><td>${data.timeline}</td></tr>` : ''}
+                ${'timeline' in data ? (data.timeline === 'fast' ? '<span class="badge urgent">Urgent</span>' : '') : ''}
               </div>
             </div>
-            ${'budget' in data ? `<div class="row">
+            ${
+              'budget' in data
+                ? `<div class="row">
               <div class="label">Budget</div>
               <div class="value">${data.budget}</div>
             </div>
-          </div>` : ''}
+          </div>`
+                : ''
+            }
 
-          ${data.branch === 'tpe' ? `
+          ${
+            data.branch === 'tpe'
+              ? `
             <div class="section">
               <h2>Détails</h2>
               <div class="row">
@@ -558,14 +586,20 @@ function generateNotificationEmail(data: QuestionnaireData ): string {
                 <div class="value">${data.tools.length > 0 ? data.tools.join(', ') : 'Aucun'}</div>
               </div>
             </div>
-          ` : ''}
+          `
+              : ''
+          }
 
-          ${data.contact.description ? `
+          ${
+            data.contact.description
+              ? `
             <div class="section">
               <h2>Description</h2>
               <p style="font-size: 14px; color: #404040; line-height: 1.6;">${data.contact.description}</p>
             </div>
-          ` : ''}
+          `
+              : ''
+          }
 
           <div class="action">
             <strong>Action requise</strong><br>
@@ -584,10 +618,10 @@ function generateNotificationEmail(data: QuestionnaireData ): string {
 
 function getTimelineLabel(timeline: string | null): string {
   const labels: Record<string, string> = {
-    'fast': 'Le plus vite possible (< 1 mois)',
+    fast: 'Le plus vite possible (< 1 mois)',
     '1-3months': 'Dans 1 à 3 mois',
     '3-6months': 'Dans 3 à 6 mois',
-    'flexible': 'Pas de deadline précise'
+    flexible: 'Pas de deadline précise',
   };
   return labels[timeline || ''] || 'Non spécifié';
 }
@@ -599,7 +633,7 @@ function getBudgetLabel(budget: string | null): string {
     '5000-10000': '5 000 € - 10 000 €',
     '10000-20000': '10 000 € - 20 000 €',
     '>20000': 'Plus de 20 000 €',
-    'tbd': 'À définir ensemble',
+    tbd: 'À définir ensemble',
     '5000-15000': '5 000 € - 15 000 €',
     '15000-30000': '15 000 € - 30 000 €',
     '30000-50000': '30 000 € - 50 000 €',
@@ -607,7 +641,7 @@ function getBudgetLabel(budget: string | null): string {
     '<3000': 'Moins de 3 000 €',
     '3000-10000': '3 000 € - 10 000 €',
     '>10000': 'Plus de 10 000 €',
-    'unknown': 'Aucune idée'
+    unknown: 'Aucune idée',
   };
   return labels[budget || ''] || 'Non spécifié';
 }

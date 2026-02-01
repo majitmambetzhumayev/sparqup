@@ -14,12 +14,12 @@ export default function ProgressBar({
   currentStep,
   totalSteps,
   label,
-  className
+  className,
 }: ProgressBarProps) {
   const percentage = Math.round((currentStep / totalSteps) * 100);
 
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn('space-y-2', className)}>
       {/* Label */}
       {label && (
         <div className="flex items-center justify-between text-sm">

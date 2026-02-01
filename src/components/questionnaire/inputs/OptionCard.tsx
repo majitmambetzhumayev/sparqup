@@ -24,7 +24,7 @@ export default function OptionCard({
   selected,
   onChange,
   type,
-  disabled = false
+  disabled = false,
 }: OptionCardProps) {
   return (
     <button
@@ -32,11 +32,11 @@ export default function OptionCard({
       onClick={() => !disabled && onChange(id)}
       disabled={disabled}
       className={cn(
-        "text-left transition-all duration-150",
-        "flex items-start gap-3 py-3 px-4 rounded-lg",
-        "hover:bg-neutral-50",
-        "max-w-2xl", // ← Limite la largeur max
-        disabled && "opacity-50 cursor-not-allowed"
+        'text-left transition-all duration-150',
+        'flex items-start gap-3 py-3 px-4 rounded-lg',
+        'hover:bg-neutral-50',
+        'max-w-2xl', // ← Limite la largeur max
+        disabled && 'opacity-50 cursor-not-allowed'
       )}
     >
       {/* Hidden input */}
@@ -54,54 +54,44 @@ export default function OptionCard({
         {type === 'checkbox' ? (
           <div
             className={cn(
-              "w-5 h-5 rounded border-2 transition-all duration-150 flex items-center justify-center",
+              'w-5 h-5 rounded border-2 transition-all duration-150 flex items-center justify-center',
               selected
-                ? "bg-neutral-900 border-neutral-900"
-                : "bg-white border-neutral-300 hover:border-neutral-400"
+                ? 'bg-neutral-900 border-neutral-900'
+                : 'bg-white border-neutral-300 hover:border-neutral-400'
             )}
           >
-            {selected && (
-              <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
-            )}
+            {selected && <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />}
           </div>
         ) : (
           <div
             className={cn(
-              "w-5 h-5 rounded-full border-2 transition-all duration-150 flex items-center justify-center",
+              'w-5 h-5 rounded-full border-2 transition-all duration-150 flex items-center justify-center',
               selected
-                ? "bg-neutral-900 border-neutral-900"
-                : "bg-white border-neutral-300 hover:border-neutral-400"
+                ? 'bg-neutral-900 border-neutral-900'
+                : 'bg-white border-neutral-300 hover:border-neutral-400'
             )}
           >
-            {selected && (
-              <div className="w-2 h-2 rounded-full bg-white" />
-            )}
+            {selected && <div className="w-2 h-2 rounded-full bg-white" />}
           </div>
         )}
       </div>
 
       {/* Icône emoji (optionnel) */}
-      {icon && (
-        <div className="flex-shrink-0 text-xl mt-0.5">
-          {icon}
-        </div>
-      )}
+      {icon && <div className="flex-shrink-0 text-xl mt-0.5">{icon}</div>}
 
       {/* Contenu texte */}
       <div className="flex-1 min-w-0">
         <div
           className={cn(
-            "text-base transition-all duration-150",
-            selected ? "font-semibold text-neutral-950" : "font-normal text-neutral-900"
+            'text-base transition-all duration-150',
+            selected ? 'font-semibold text-neutral-950' : 'font-normal text-neutral-900'
           )}
         >
           {label}
         </div>
 
         {description && (
-          <div className="text-sm text-neutral-500 mt-0.5 leading-snug">
-            {description}
-          </div>
+          <div className="text-sm text-neutral-500 mt-0.5 leading-snug">{description}</div>
         )}
       </div>
     </button>

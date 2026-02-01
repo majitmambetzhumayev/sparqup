@@ -36,21 +36,21 @@ export default function LeadsPage() {
 
   const deleteLead = async (id: number) => {
     if (!confirm('Supprimer ce lead ?')) return;
-    
+
     await fetch(`/api/leads/${id}`, { method: 'DELETE' });
     fetchLeads();
   };
 
   useEffect(() => {
     fetchLeads();
-  }, [fetchLeads]); 
-  
+  }, [fetchLeads]);
+
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-white">Leads</h1>
         <NotionSyncButton />
-        <Link 
+        <Link
           href="/dashboard/leads/new"
           className="px-4 py-2 bg-forest-600 text-white rounded-lg hover:bg-forest-500 transition"
         >
@@ -62,7 +62,7 @@ export default function LeadsPage() {
       <div className="flex gap-4 mb-6">
         <select
           value={filter.status}
-          onChange={(e) => setFilter({ ...filter, status: e.target.value })}
+          onChange={e => setFilter({ ...filter, status: e.target.value })}
           className="px-4 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-white"
         >
           <option value="">Tous les statuts</option>
@@ -74,7 +74,7 @@ export default function LeadsPage() {
 
         <select
           value={filter.source}
-          onChange={(e) => setFilter({ ...filter, source: e.target.value })}
+          onChange={e => setFilter({ ...filter, source: e.target.value })}
           className="px-4 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-white"
         >
           <option value="">Toutes les sources</option>
@@ -89,13 +89,27 @@ export default function LeadsPage() {
         <table className="w-full">
           <thead className="bg-neutral-800">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Nom</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Email</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Budget</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Source</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Date</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-neutral-400 uppercase">Actions</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+                Nom
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+                Email
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+                Budget
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+                Source
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400 uppercase">
+                Date
+              </th>
+              <th className="px-6 py-3 text-right text-xs font-medium text-neutral-400 uppercase">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-800">
@@ -112,18 +126,23 @@ export default function LeadsPage() {
                 </td>
               </tr>
             ) : (
-              leads.map((lead) => (
+              leads.map(lead => (
                 <tr key={lead.id} className="hover:bg-neutral-800/50 transition">
                   <td className="px-6 py-4 text-sm text-white">{lead.name}</td>
                   <td className="px-6 py-4 text-sm text-neutral-300">{lead.email}</td>
                   <td className="px-6 py-4 text-sm text-neutral-300">{lead.budget_range || '-'}</td>
                   <td className="px-6 py-4 text-sm">
-                    <span className={`px-2 py-1 rounded-full text-xs ${
-                      lead.status === 'new' ? 'bg-blue-500/20 text-blue-400' :
-                      lead.status === 'contacted' ? 'bg-yellow-500/20 text-yellow-400' :
-                      lead.status === 'qualified' ? 'bg-green-500/20 text-green-400' :
-                      'bg-purple-500/20 text-purple-400'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        lead.status === 'new'
+                          ? 'bg-blue-500/20 text-blue-400'
+                          : lead.status === 'contacted'
+                            ? 'bg-yellow-500/20 text-yellow-400'
+                            : lead.status === 'qualified'
+                              ? 'bg-green-500/20 text-green-400'
+                              : 'bg-purple-500/20 text-purple-400'
+                      }`}
+                    >
                       {lead.status}
                     </span>
                   </td>

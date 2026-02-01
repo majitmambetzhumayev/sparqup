@@ -20,7 +20,7 @@ export default function HomePage() {
     };
 
     window.addEventListener('open-questionnaire', handleOpenQuestionnaire);
-    
+
     return () => {
       window.removeEventListener('open-questionnaire', handleOpenQuestionnaire);
     };

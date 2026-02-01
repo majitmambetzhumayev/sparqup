@@ -26,8 +26,8 @@ interface SectionContainerProps {
   };
 }
 
-export default function SectionContainer({ 
-  children, 
+export default function SectionContainer({
+  children,
   className,
   gridBgColor,
   cellBgColor,
@@ -40,55 +40,58 @@ export default function SectionContainer({
   gradients,
   id,
 }: SectionContainerProps) {
-
   return (
-    <section id={id} className={cn("relative", className)}>
+    <section id={id} className={cn('relative', className)}>
       {/* Barre gradient top */}
       {showTopGradient && (
-        <div className={cn(
-          "absolute top-0 left-0 right-0 bg-gradient-to-b to-transparent z-30 pointer-events-none",
-          gradientHeight,
-          gradientFromColor
-        )} />
+        <div
+          className={cn(
+            'absolute top-0 left-0 right-0 bg-gradient-to-b to-transparent z-30 pointer-events-none',
+            gradientHeight,
+            gradientFromColor
+          )}
+        />
       )}
 
       {/* Barre gradient bottom */}
       {showBottomGradient && (
-        <div className={cn(
-          "absolute bottom-0 left-0 right-0 bg-gradient-to-t to-transparent z-30 pointer-events-none",
-          gradientHeight,
-          gradientFromColor
-        )} />
+        <div
+          className={cn(
+            'absolute bottom-0 left-0 right-0 bg-gradient-to-t to-transparent z-30 pointer-events-none',
+            gradientHeight,
+            gradientFromColor
+          )}
+        />
       )}
 
       {/* Grid */}
-      <div className={cn(
-        "grid grid-cols-[1fr_minmax(0,1080px)_1fr] grid-rows-[auto_1fr_auto]",
-        "gap-px",
-        gridBgColor
-      )}>
+      <div
+        className={cn(
+          'grid grid-cols-[1fr_minmax(0,1080px)_1fr] grid-rows-[auto_1fr_auto]',
+          'gap-px',
+          gridBgColor
+        )}
+      >
         {/* ROW 1 - Top bar */}
         {showTopBar && (
           <>
-            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.topLeft)} />
-            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.topCenter)} />
-            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.topRight)} />
+            <div className={cn('min-h-[5rem] lg:min-h-[8rem]', gradients.topLeft)} />
+            <div className={cn('min-h-[5rem] lg:min-h-[8rem]', gradients.topCenter)} />
+            <div className={cn('min-h-[5rem] lg:min-h-[8rem]', gradients.topRight)} />
           </>
         )}
 
         {/* ROW 2 - Contenu principal */}
-        <div className={cn("min-w-[1rem] lg:min-h-[3rem]", gradients.middleLeft)} />
-        <div className={cn(cellBgColor)}>
-          {children}
-        </div>
-        <div className={cn("min-w-[1rem] lg:min-h-[3rem]", gradients.middleRight)} />
+        <div className={cn('min-w-[1rem] lg:min-h-[3rem]', gradients.middleLeft)} />
+        <div className={cn(cellBgColor)}>{children}</div>
+        <div className={cn('min-w-[1rem] lg:min-h-[3rem]', gradients.middleRight)} />
 
         {/* ROW 3 - Bottom bar */}
         {showBottomBar && (
           <>
-            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.bottomLeft)} />
-            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.bottomCenter)} />
-            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.bottomRight)} />
+            <div className={cn('min-h-[5rem] lg:min-h-[8rem]', gradients.bottomLeft)} />
+            <div className={cn('min-h-[5rem] lg:min-h-[8rem]', gradients.bottomCenter)} />
+            <div className={cn('min-h-[5rem] lg:min-h-[8rem]', gradients.bottomRight)} />
           </>
         )}
       </div>

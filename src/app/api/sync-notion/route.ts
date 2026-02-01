@@ -38,9 +38,9 @@ export async function POST() {
       `;
     }
 
-    return NextResponse.json({ 
-      success: true, 
-      synced: leads.length 
+    return NextResponse.json({
+      success: true,
+      synced: leads.length,
     });
   } catch (error) {
     console.error('Notion sync error:', error);

@@ -28,29 +28,29 @@ export async function GET(request: Request) {
         await notion.pages.create({
           parent: { database_id: process.env.NOTION_DATABASE_ID! },
           properties: {
-            Name: { 
-              title: [{ text: { content: lead.name || 'Sans nom' } }] 
+            Name: {
+              title: [{ text: { content: lead.name || 'Sans nom' } }],
             },
-            Email: { 
-              email: lead.email 
+            Email: {
+              email: lead.email,
             },
-            Phone: { 
-              phone_number: lead.phone || '' 
+            Phone: {
+              phone_number: lead.phone || '',
             },
-            Company: { 
-              rich_text: [{ text: { content: lead.company || '' } }] 
+            Company: {
+              rich_text: [{ text: { content: lead.company || '' } }],
             },
-            Message: { 
-              rich_text: [{ text: { content: lead.message || '' } }] 
+            Message: {
+              rich_text: [{ text: { content: lead.message || '' } }],
             },
-            Budget: { 
-              select: { name: lead.budget || 'unknown' } 
+            Budget: {
+              select: { name: lead.budget || 'unknown' },
             },
-            Source: { 
-              select: { name: lead.source || 'unknown' } 
+            Source: {
+              select: { name: lead.source || 'unknown' },
             },
-            Status: { 
-              status: { name: lead.status || 'new' }
+            Status: {
+              status: { name: lead.status || 'new' },
             },
           },
         });
@@ -61,17 +61,16 @@ export async function GET(request: Request) {
           SET synced_to_notion = true 
           WHERE id = ${lead.id}
         `;
-        
+
         synced++;
-        
+
         // Rate limit protection: ~3 req/sec
         await new Promise(resolve => setTimeout(resolve, 350));
-        
       } catch (err) {
         const error = err instanceof Error ? err : new Error(String(err));
         console.error(`Error syncing lead ${lead.id}:`, error);
         errors.push({ leadId: lead.id, error: error.message });
-        
+
         // Stop si rate limited
         if ('code' in error && (error as { code?: string }).code === 'rate_limited') {
           console.log('⚠️ Rate limited, stopping sync');
@@ -80,19 +79,21 @@ export async function GET(request: Request) {
       }
     }
 
-    return NextResponse.json({ 
-      success: true, 
+    return NextResponse.json({
+      success: true,
       synced,
       total: leads.length,
       errors: errors.length > 0 ? errors : undefined,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-    
   } catch (error) {
     const err = error instanceof Error ? error : new Error(String(error));
     console.error('Notion sync error:', err);
-    return NextResponse.json({ 
-      error: err.message 
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: err.message,
+      },
+      { status: 500 }
+    );
   }
 }

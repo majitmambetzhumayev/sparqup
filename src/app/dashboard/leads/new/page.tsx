@@ -38,10 +38,7 @@ export default function NewLeadPage() {
   return (
     <div className="max-w-3xl">
       <div className="flex items-center gap-4 mb-8">
-        <button
-          onClick={() => router.back()}
-          className="text-neutral-400 hover:text-white"
-        >
+        <button onClick={() => router.back()} className="text-neutral-400 hover:text-white">
           ← Retour
         </button>
         <h1 className="text-3xl font-bold text-white">Nouveau lead</h1>
@@ -50,51 +47,43 @@ export default function NewLeadPage() {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Même structure que Edit, mais avec formData */}
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Nom *
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Nom *</label>
           <input
             type="text"
             required
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onChange={e => setFormData({ ...formData, name: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Email *
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Email *</label>
           <input
             type="email"
             required
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={e => setFormData({ ...formData, email: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Téléphone
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Téléphone</label>
           <input
             type="tel"
             value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            onChange={e => setFormData({ ...formData, phone: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Entreprise
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Entreprise</label>
           <input
             type="text"
             value={formData.company}
-            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+            onChange={e => setFormData({ ...formData, company: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           />
         </div>
@@ -106,18 +95,16 @@ export default function NewLeadPage() {
           <textarea
             rows={4}
             value={formData.project_description}
-            onChange={(e) => setFormData({ ...formData, project_description: e.target.value })}
+            onChange={e => setFormData({ ...formData, project_description: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none resize-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">
-            Budget
-          </label>
+          <label className="block text-sm font-medium text-neutral-300 mb-2">Budget</label>
           <select
             value={formData.budget_range}
-            onChange={(e) => setFormData({ ...formData, budget_range: e.target.value })}
+            onChange={e => setFormData({ ...formData, budget_range: e.target.value })}
             className="w-full px-4 py-3 bg-neutral-900 border border-neutral-700 rounded-lg text-white focus:border-forest-500 focus:outline-none"
           >
             <option value="">Non spécifié</option>

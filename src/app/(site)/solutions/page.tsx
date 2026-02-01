@@ -6,23 +6,15 @@ import PageHeader from '@/components/layout/PageHeader';
 import ServiceSection from '@/components/services/ServiceSection';
 import Link from 'next/link';
 
-
 export default function ServicesPage() {
-
-
-
   return (
     <>
-
-        <PageHeader
-          title="Solutions"
-          subtitle="Développement / automatisation / Digitalisation"
-        />
+      <PageHeader title="Solutions" subtitle="Développement / automatisation / Digitalisation" />
       {/* Services détaillés */}
       {SERVICES.map((service, index) => {
         const IconComponent = service.icon; // ← Récupère le composant Lucide
         const isReversed = index % 2 !== 0; // Alterne gauche/droite
-        
+
         return (
           <ServiceSection
             id={service.id}
@@ -45,7 +37,7 @@ export default function ServicesPage() {
             imageShadow={service.imageConfig?.shadow ?? true}
             imageRounded={service.imageConfig?.rounded ?? true}
             imageObjectFit={service.imageConfig?.objectFit || 'cover'}
-            aspectRatio={service.imageConfig?.aspectRatio }
+            aspectRatio={service.imageConfig?.aspectRatio}
           />
         );
       })}
@@ -54,9 +46,7 @@ export default function ServicesPage() {
       <section className="bg-forest-950 text-white py-20">
         <Container size="md">
           <div className="text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              Pas sûr de quelle solution choisir ?
-            </h2>
+            <h2 className="text-3xl font-bold mb-4">Pas sûr de quelle solution choisir ?</h2>
             <p className="text-forest-100 mb-8 text-lg">
               Répondez à quelques questions, je vous recommande la meilleure approche
             </p>
@@ -70,7 +60,6 @@ export default function ServicesPage() {
           </div>
         </Container>
       </section>
-
     </>
   );
 }

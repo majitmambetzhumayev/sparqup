@@ -15,9 +15,5 @@ export default function ThemeToggle() {
     }
   }, [isDark]);
 
-  return (
-    <button onClick={() => setIsDark(!isDark)}>
-      {isDark ? '☀️' : '🌙'}
-    </button>
-  );
+  return <button onClick={() => setIsDark(!isDark)}>{isDark ? '☀️' : '🌙'}</button>;
 }

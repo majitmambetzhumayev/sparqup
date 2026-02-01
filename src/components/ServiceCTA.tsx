@@ -19,10 +19,7 @@ export default function ServiceCTA({ pricing, duration }: ServiceCTAProps) {
         <div className="text-sm text-neutral-600 mb-1">Durée moyenne</div>
         <div className="text-lg font-semibold text-neutral-700">{duration}</div>
       </div>
-      <Button
-        variant="primary"
-        onClick={() => window.location.href = '/questionnaire'}
-      >
+      <Button variant="primary" onClick={() => (window.location.href = '/questionnaire')}>
         Simuler ce service →
       </Button>
     </div>

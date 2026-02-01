@@ -13,7 +13,11 @@ interface Q2ConseilContactProps {
   onSubmit: (contact: ContactData) => Promise<void>;
 }
 
-export default function Q2ConseilContact({ objectives, onObjectivesChange, onSubmit }: Q2ConseilContactProps) {
+export default function Q2ConseilContact({
+  objectives,
+  onObjectivesChange,
+  onSubmit,
+}: Q2ConseilContactProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const objectiveOptions: CheckboxOption[] = [
@@ -22,7 +26,7 @@ export default function Q2ConseilContact({ objectives, onObjectivesChange, onSub
     { id: 'automate', label: 'Automatiser des tâches', description: 'Gain de temps' },
     { id: 'crm', label: 'Gérer mes clients', description: 'CRM, suivi' },
     { id: 'booking', label: 'Prendre des réservations', description: 'Agenda en ligne' },
-    { id: 'modern', label: 'Site moderne et pro', description: 'Image de marque' }
+    { id: 'modern', label: 'Site moderne et pro', description: 'Image de marque' },
   ];
 
   const handleSubmit = async (data: ContactData) => {
@@ -68,10 +72,7 @@ export default function Q2ConseilContact({ objectives, onObjectivesChange, onSub
         </div>
 
         {/* Contact Form */}
-        <ContactForm
-          onSubmit={handleSubmit}
-          isLoading={isSubmitting}
-        />
+        <ContactForm onSubmit={handleSubmit} isLoading={isSubmitting} />
       </div>
     </QuestionCard>
   );

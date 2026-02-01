@@ -1,18 +1,18 @@
 // src/auth.ts
-import NextAuth, { DefaultSession } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import { sql } from "@/lib/db";
-import bcrypt from "bcrypt";
+import NextAuth, { DefaultSession } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import { sql } from '@/lib/db';
+import bcrypt from 'bcrypt';
 
 // ✅ Types pour NextAuth (sans JWT module)
-declare module "next-auth" {
+declare module 'next-auth' {
   interface User {
     role?: string;
   }
   interface Session {
     user: {
       role?: string;
-    } & DefaultSession["user"];
+    } & DefaultSession['user'];
   }
 }
 
@@ -20,8 +20,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -46,10 +46,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         console.log('✅ User trouvé:', { email: user.email, role: user.role });
 
-        const isValid = await bcrypt.compare(
-          credentials.password as string,
-          user.password_hash
-        );
+        const isValid = await bcrypt.compare(credentials.password as string, user.password_hash);
 
         console.log('🔐 Password valide?', isValid);
 
@@ -66,8 +63,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           name: user.name,
           role: user.role,
         };
-      }
-    })
+      },
+    }),
   ],
   pages: {
     signIn: '/login',
@@ -76,12 +73,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-      
+
       if (isOnDashboard) {
         if (isLoggedIn) return true;
         return false;
       }
-      
+
       return true;
     },
     async jwt({ token, user }) {

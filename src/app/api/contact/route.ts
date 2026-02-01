@@ -2,17 +2,13 @@
 import { getResend } from '@/lib/email';
 import { NextResponse } from 'next/server';
 
-
 export async function POST(request: Request) {
   try {
     const { name, email, message } = await request.json();
 
     // Validation
     if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: 'Tous les champs sont requis' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Tous les champs sont requis' }, { status: 400 });
     }
 
     const resend = getResend();
@@ -53,15 +49,12 @@ export async function POST(request: Request) {
           </div>
         </body>
         </html>
-      `
+      `,
     });
 
     if (notificationResult.error) {
       console.error('❌ Erreur notification:', notificationResult.error);
-      return NextResponse.json(
-        { error: 'Erreur envoi notification' },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: 'Erreur envoi notification' }, { status: 500 });
     }
 
     // 2️⃣ Email de CONFIRMATION (utilisateur)
@@ -105,7 +98,7 @@ export async function POST(request: Request) {
           </div>
         </body>
         </html>
-      `
+      `,
     });
 
     if (confirmationResult.error) {
@@ -115,12 +108,8 @@ export async function POST(request: Request) {
 
     console.log('✅ Emails envoyés avec succès');
     return NextResponse.json({ success: true });
-
   } catch (error) {
     console.error('❌ Erreur serveur:', error);
-    return NextResponse.json(
-      { error: 'Erreur serveur' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
   }
 }

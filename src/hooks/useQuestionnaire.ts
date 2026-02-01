@@ -18,12 +18,12 @@ export function useQuestionnaire() {
   const open = useCallback((preset?: QuestionnairePreset) => {
     // Nettoie d'abord
     sessionStorage.removeItem('questionnaire-preset');
-    
+
     // Injecte preset si fourni
     if (preset) {
       sessionStorage.setItem('questionnaire-preset', JSON.stringify(preset));
     }
-    
+
     // Force re-mount + ouvre
     setModalKey(prev => prev + 1);
     setIsOpen(true);
@@ -37,6 +37,6 @@ export function useQuestionnaire() {
     isOpen,
     modalKey,
     open,
-    close
+    close,
   };
 }

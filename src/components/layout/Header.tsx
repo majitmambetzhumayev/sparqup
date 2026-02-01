@@ -44,19 +44,19 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
-                src="/media/logos/sparqup-light.svg"  // Version dark (fond clair)
+                src="/media/logos/sparqup-light.svg" // Version dark (fond clair)
                 alt="SparqUp"
                 width={120}
                 height={32}
                 priority
                 className="h-8 w-auto"
               />
-              <span className='pl-3 text-forest-950 text-xl'>Sparqup</span>
+              <span className="pl-3 text-forest-950 text-xl">Sparqup</span>
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
+              {navLinks.map(link => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -74,10 +74,11 @@ export default function Header() {
 
             {/* Right side */}
             <div className="hidden lg:flex items-center gap-4">
-              <button onClick={() => open()} className="group flex items-center gap-3 pl-6 pr-2 py-2 bg-neutral-900 hover:bg-neutral-800 rounded-full transition-colors">
-                <span className="text-sm font-medium text-neutral-100">
-                  Simuler mon projet
-                </span>
+              <button
+                onClick={() => open()}
+                className="group flex items-center gap-3 pl-6 pr-2 py-2 bg-neutral-900 hover:bg-neutral-800 rounded-full transition-colors"
+              >
+                <span className="text-sm font-medium text-neutral-100">Simuler mon projet</span>
                 <div className="w-8 h-8 bg-neutral-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                   <ArrowRight className="w-4 h-4 text-black" />
                 </div>
@@ -98,7 +99,7 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="lg:hidden mt-2 bg-white rounded-3xl shadow-lg p-6 max-w-7xl mx-auto">
             <nav className="flex flex-col gap-4">
-              {navLinks.map((link) => (
+              {navLinks.map(link => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -113,11 +114,12 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
-                        
-              <button onClick={() => open()} className="w-full flex items-center justify-between pl-6 pr-2 py-3 bg-blue-100 hover:bg-blue-200 rounded-full transition-colors mt-4">
-                <span className="text-sm font-medium text-neutral-900">
-                  Simuler mon projet
-                </span>
+
+              <button
+                onClick={() => open()}
+                className="w-full flex items-center justify-between pl-6 pr-2 py-3 bg-blue-100 hover:bg-blue-200 rounded-full transition-colors mt-4"
+              >
+                <span className="text-sm font-medium text-neutral-900">Simuler mon projet</span>
                 <div className="w-8 h-8 bg-neutral-900 rounded-full flex items-center justify-center">
                   <ArrowRight className="w-4 h-4 text-white" />
                 </div>

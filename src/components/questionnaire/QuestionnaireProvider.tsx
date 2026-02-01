@@ -26,11 +26,7 @@ export function QuestionnaireProvider({ children }: { children: ReactNode }) {
   return (
     <QuestionnaireContext.Provider value={{ open, close }}>
       {children}
-      <QuestionnaireModal 
-        key={modalKey}
-        isOpen={isOpen}
-        onClose={close}
-      />
+      <QuestionnaireModal key={modalKey} isOpen={isOpen} onClose={close} />
     </QuestionnaireContext.Provider>
   );
 }

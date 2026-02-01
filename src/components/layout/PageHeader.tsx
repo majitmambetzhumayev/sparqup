@@ -9,12 +9,7 @@ interface PageHeaderProps {
   children?: ReactNode; // Pour CTAs custom si besoin
 }
 
-export default function PageHeader({
-  title,
-  subtitle,
-  badge,
-  children
-}: PageHeaderProps) {
+export default function PageHeader({ title, subtitle, badge, children }: PageHeaderProps) {
   return (
     <section className="relative bg-forest-900  border-neutral-200">
       <div className="container pb-5 pt-30 px-4 md:px-32 md:pt-40">
@@ -39,11 +34,7 @@ export default function PageHeader({
           </h1>
 
           {/* Children (CTAs, etc) */}
-          {children && (
-            <div className="mt-8">
-              {children}
-            </div>
-          )}
+          {children && <div className="mt-8">{children}</div>}
         </div>
       </div>
     </section>

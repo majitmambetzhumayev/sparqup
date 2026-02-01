@@ -25,7 +25,7 @@ export default function CheckboxGroup({
   value,
   onChange,
   maxSelections,
-  exclusiveOptions = []
+  exclusiveOptions = [],
 }: CheckboxGroupProps) {
   const handleToggle = (id: string) => {
     // Si option exclusive (ex: "Rien de tout ça")
@@ -54,12 +54,12 @@ export default function CheckboxGroup({
 
   return (
     <div className="space-y-2 max-w-2xl">
-      {options.map((option) => {
-        const isDisabled: boolean = 
-          option.disabled === true || 
-          (maxSelections !== undefined && 
-           value.length >= maxSelections && 
-           !value.includes(option.id));
+      {options.map(option => {
+        const isDisabled: boolean =
+          option.disabled === true ||
+          (maxSelections !== undefined &&
+            value.length >= maxSelections &&
+            !value.includes(option.id));
 
         return (
           <OptionCard

@@ -6,7 +6,7 @@ import { BASE_PRICES, COMPLEXITY_MULTIPLIERS } from './constants';
 
 export function calculateEstimation(state: QuestionnaireState): Estimation {
   const score = calculateComplexityScore(state);
-  
+
   if (!state.projectType) {
     throw new Error('Project type is required for estimation');
   }
@@ -16,7 +16,7 @@ export function calculateEstimation(state: QuestionnaireState): Estimation {
   // ============================================
 
   const basePrice = BASE_PRICES[state.projectType];
-  
+
   // Multiplicateur selon complexity score
   let multiplier = COMPLEXITY_MULTIPLIERS.normal;
   if (score < 20) multiplier = COMPLEXITY_MULTIPLIERS.simple;
@@ -32,7 +32,7 @@ export function calculateEstimation(state: QuestionnaireState): Estimation {
   // ============================================
 
   let weeks = 2;
-  
+
   // Ajustement par type
   if (state.projectType === 'ecommerce') weeks += 2;
   if (state.projectType === 'plateforme') weeks += 3;
@@ -78,7 +78,7 @@ export function calculateEstimation(state: QuestionnaireState): Estimation {
     maxWeeks,
     stack,
     recommendations,
-    recurringCosts
+    recurringCosts,
   };
 }
 
@@ -89,47 +89,130 @@ function getRecommendedStack(state: QuestionnaireState): StackTool[] {
   switch (state.projectType) {
     case 'vitrine':
       stack.push(
-        { name: 'Next.js', category: 'Framework', included: true, description: 'Framework React moderne et performant' },
-        { name: 'Vercel', category: 'Hébergement', monthlyCost: '20-50€/mois', included: false, description: 'Hébergement optimisé' },
-        { name: 'Mailerlite', category: 'Email', monthlyCost: '13€/mois', included: false, description: 'Email marketing' }
+        {
+          name: 'Next.js',
+          category: 'Framework',
+          included: true,
+          description: 'Framework React moderne et performant',
+        },
+        {
+          name: 'Vercel',
+          category: 'Hébergement',
+          monthlyCost: '20-50€/mois',
+          included: false,
+          description: 'Hébergement optimisé',
+        },
+        {
+          name: 'Mailerlite',
+          category: 'Email',
+          monthlyCost: '13€/mois',
+          included: false,
+          description: 'Email marketing',
+        }
       );
       break;
 
     case 'ecommerce':
       stack.push(
-        { name: 'Shopify', category: 'E-commerce', monthlyCost: '27-79€/mois', included: false, description: 'Plateforme e-commerce complète' },
-        { name: 'Stripe', category: 'Paiement', monthlyCost: '1.4% + 0.25€ par transaction', included: true, description: 'Paiement sécurisé' },
-        { name: 'Klaviyo', category: 'Email', monthlyCost: '20-150€/mois', included: false, description: 'Email marketing e-commerce' }
+        {
+          name: 'Shopify',
+          category: 'E-commerce',
+          monthlyCost: '27-79€/mois',
+          included: false,
+          description: 'Plateforme e-commerce complète',
+        },
+        {
+          name: 'Stripe',
+          category: 'Paiement',
+          monthlyCost: '1.4% + 0.25€ par transaction',
+          included: true,
+          description: 'Paiement sécurisé',
+        },
+        {
+          name: 'Klaviyo',
+          category: 'Email',
+          monthlyCost: '20-150€/mois',
+          included: false,
+          description: 'Email marketing e-commerce',
+        }
       );
       break;
 
     case 'automatisation':
       stack.push(
-        { name: 'Zapier', category: 'Automatisation', monthlyCost: '20-70€/mois', included: false, description: 'Automatisation no-code' },
-        { name: 'Airtable', category: 'Base de données', monthlyCost: '10-20€/mois', included: false, description: 'Base de données flexible' },
-        { name: 'Make', category: 'Automatisation', monthlyCost: '9-29€/mois', included: false, description: 'Alternative Zapier plus puissante' }
+        {
+          name: 'Zapier',
+          category: 'Automatisation',
+          monthlyCost: '20-70€/mois',
+          included: false,
+          description: 'Automatisation no-code',
+        },
+        {
+          name: 'Airtable',
+          category: 'Base de données',
+          monthlyCost: '10-20€/mois',
+          included: false,
+          description: 'Base de données flexible',
+        },
+        {
+          name: 'Make',
+          category: 'Automatisation',
+          monthlyCost: '9-29€/mois',
+          included: false,
+          description: 'Alternative Zapier plus puissante',
+        }
       );
       break;
 
     case 'plateforme':
       stack.push(
-        { name: 'Next.js', category: 'Framework', included: true, description: 'Framework full-stack' },
-        { name: 'Supabase', category: 'Backend', monthlyCost: '25€/mois', included: false, description: 'Base de données + Auth' },
-        { name: 'Stripe', category: 'Paiement', monthlyCost: '1.4% + 0.25€', included: true, description: 'Paiement et abonnements' },
-        { name: 'Resend', category: 'Email', monthlyCost: '20€/mois', included: false, description: 'Envoi d\'emails transactionnels' }
+        {
+          name: 'Next.js',
+          category: 'Framework',
+          included: true,
+          description: 'Framework full-stack',
+        },
+        {
+          name: 'Supabase',
+          category: 'Backend',
+          monthlyCost: '25€/mois',
+          included: false,
+          description: 'Base de données + Auth',
+        },
+        {
+          name: 'Stripe',
+          category: 'Paiement',
+          monthlyCost: '1.4% + 0.25€',
+          included: true,
+          description: 'Paiement et abonnements',
+        },
+        {
+          name: 'Resend',
+          category: 'Email',
+          monthlyCost: '20€/mois',
+          included: false,
+          description: "Envoi d'emails transactionnels",
+        }
       );
       break;
 
     default:
-      stack.push(
-        { name: 'Stack sur-mesure', category: 'Framework', included: true, description: 'À définir selon besoins' }
-      );
+      stack.push({
+        name: 'Stack sur-mesure',
+        category: 'Framework',
+        included: true,
+        description: 'À définir selon besoins',
+      });
   }
 
   // Google Analytics (toujours)
-  stack.push(
-    { name: 'Google Analytics', category: 'Analytics', monthlyCost: 'Gratuit', included: true, description: 'Tracking et statistiques' }
-  );
+  stack.push({
+    name: 'Google Analytics',
+    category: 'Analytics',
+    monthlyCost: 'Gratuit',
+    included: true,
+    description: 'Tracking et statistiques',
+  });
 
   return stack;
 }
@@ -139,21 +222,29 @@ function generateRecommendations(state: QuestionnaireState): string[] {
 
   // Assets manquants
   if (state.assets.includes('none') || state.assets.length === 0) {
-    reco.push("Je peux vous recommander des photographes et rédacteurs partenaires pour créer vos contenus.");
+    reco.push(
+      'Je peux vous recommander des photographes et rédacteurs partenaires pour créer vos contenus.'
+    );
   }
 
   if (!state.assets.includes('logo')) {
-    reco.push("Pour votre logo, je peux vous orienter vers un designer ou utiliser de l'IA pour créer une première version.");
+    reco.push(
+      "Pour votre logo, je peux vous orienter vers un designer ou utiliser de l'IA pour créer une première version."
+    );
   }
 
   // Budget vs features
   if (state.budget === '<2000' && state.features.length > 5) {
-    reco.push("Avec ce budget, je recommande de prioriser 2-3 fonctionnalités essentielles pour la V1.");
+    reco.push(
+      'Avec ce budget, je recommande de prioriser 2-3 fonctionnalités essentielles pour la V1.'
+    );
   }
 
   // Timeline vs scope
   if (state.timeline === 'fast' && state.features.length > 8) {
-    reco.push("Pour tenir la timeline rapide, on devra découper en 2 phases : MVP d'abord, puis fonctionnalités avancées.");
+    reco.push(
+      "Pour tenir la timeline rapide, on devra découper en 2 phases : MVP d'abord, puis fonctionnalités avancées."
+    );
   }
 
   return reco;

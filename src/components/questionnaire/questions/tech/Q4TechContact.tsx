@@ -23,16 +23,13 @@ export default function Q4TechContact({ onSubmit }: Q4TechContactProps) {
   };
 
   return (
-    <QuestionCard
-      title="Parlons de votre projet technique"
-      width="narrow"
-      spacing="compact"
-    >
+    <QuestionCard title="Parlons de votre projet technique" width="narrow" spacing="compact">
       <div className="space-y-8">
         {/* Message explicatif */}
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
           <p className="text-sm text-blue-800 leading-relaxed">
-            <strong>💡 Prochaines étapes :</strong><br/>
+            <strong>💡 Prochaines étapes :</strong>
+            <br />
             Je vous recontacte sous 24h pour un échange de 30-45 min afin de :
           </p>
           <ul className="mt-3 space-y-1 text-sm text-blue-800">
@@ -44,10 +41,7 @@ export default function Q4TechContact({ onSubmit }: Q4TechContactProps) {
         </div>
 
         {/* Contact Form */}
-        <ContactForm
-          onSubmit={handleSubmit}
-          isLoading={isSubmitting}
-        />
+        <ContactForm onSubmit={handleSubmit} isLoading={isSubmitting} />
       </div>
     </QuestionCard>
   );

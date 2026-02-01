@@ -9,7 +9,6 @@ import Button from '@/components/ui/Button';
 import { useQuestionnaireModal } from '../questionnaire/QuestionnaireProvider';
 
 export default function FinalCTA() {
-
   const { open } = useQuestionnaireModal();
 
   return (
@@ -28,19 +27,19 @@ export default function FinalCTA() {
             5 questions → estimation immédiate
           </p>
 
-            <Button 
-              onClick={() => open()} 
-              variant="primary" 
-              size="lg"
-              className="bg-black text-neutral-100 hover:bg-accent-50 shadow-2xl hover:shadow-accent-500/20"
-            >
-              Simuler mon projet maintenant
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-
+          <Button
+            onClick={() => open()}
+            variant="primary"
+            size="lg"
+            className="bg-black text-neutral-100 hover:bg-accent-50 shadow-2xl hover:shadow-accent-500/20"
+          >
+            Simuler mon projet maintenant
+            <ArrowRight className="w-5 h-5" />
+          </Button>
 
           <p className="mt-6 text-sm text-neutral-400">
-            ⚡ Moins de 3 minutes • Estimation immédiate • 🔒 Sans engagement • 📧 Réponse garantie sous 24h
+            ⚡ Moins de 3 minutes • Estimation immédiate • 🔒 Sans engagement • 📧 Réponse garantie
+            sous 24h
           </p>
         </motion.div>
       </Container>

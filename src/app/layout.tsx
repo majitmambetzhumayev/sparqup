@@ -4,17 +4,17 @@ import './globals.css';
 import { Inter, Fraunces } from 'next/font/google';
 import Script from 'next/script';
 
-const fraunces = Fraunces({ 
+const fraunces = Fraunces({
   subsets: ['latin'],
   variable: '--font-heading',
-  weight: ['300','400','500', '600', '700', '800'],
-  display: 'swap'
+  weight: ['300', '400', '500', '600', '700', '800'],
+  display: 'swap',
 });
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-body',
-  display: 'swap'
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -22,16 +22,12 @@ export const metadata: Metadata = {
   description: 'Développement web & automatisation pour TPE/PME',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="font-body antialiased">
         {children}
-        
+
         {/* ✅ Umami Analytics - Production only */}
         {process.env.NODE_ENV === 'production' && (
           <Script

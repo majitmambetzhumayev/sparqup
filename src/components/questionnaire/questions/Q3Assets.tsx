@@ -21,30 +21,32 @@ export default function Q3Assets({ value, onChange }: Q3AssetsProps) {
   const options: CheckboxOption[] = ASSETS.map(asset => ({
     id: asset.id,
     label: asset.label,
-    description: asset.help
+    description: asset.help,
   }));
 
   const getTip = () => {
     if (selectedAssets.includes('none')) {
       return {
-        message: '💡 Pas de souci ! Je peux vous guider sur la création de charte graphique et vous recommander des ressources (photographes, rédacteurs).',
-        type: 'info' as const
+        message:
+          '💡 Pas de souci ! Je peux vous guider sur la création de charte graphique et vous recommander des ressources (photographes, rédacteurs).',
+        type: 'info' as const,
       };
     }
 
     if (selectedAssets.length >= 4 && !selectedAssets.includes('none')) {
       return {
-        message: '✅ Excellent ! Avec ces assets, on pourra démarrer rapidement et réduire les délais.',
-        type: 'info' as const
+        message:
+          '✅ Excellent ! Avec ces assets, on pourra démarrer rapidement et réduire les délais.',
+        type: 'info' as const,
       };
     }
 
     if (selectedAssets.length === 0) {
-    return {
-      message: '⚠️ Sélectionnez vos assets disponibles, ou cochez "Rien de tout ça"',
-      type: 'warning' as const
-    };
-  }
+      return {
+        message: '⚠️ Sélectionnez vos assets disponibles, ou cochez "Rien de tout ça"',
+        type: 'warning' as const,
+      };
+    }
 
     return null;
   };

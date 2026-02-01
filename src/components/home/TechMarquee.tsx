@@ -16,14 +16,14 @@ export default function TechMarquee() {
         <div className="flex gap-12 animate-marquee">
           {[...TECHS, ...TECHS].map((tech, index) => {
             const width = tech.width || DEFAULT_LOGO_WIDTH;
-            
+
             return (
               <div
                 key={`${tech.name}-${index}`}
                 className="flex-shrink-0 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                style={{ 
-                  width: `${width}px`,  // ← Parent dicte width
-                  height: '40px'        // ← Parent dicte height
+                style={{
+                  width: `${width}px`, // ← Parent dicte width
+                  height: '40px', // ← Parent dicte height
                 }}
               >
                 {/* ✅ Container relatif pour Image fill */}
@@ -31,9 +31,9 @@ export default function TechMarquee() {
                   <Image
                     src={tech.logo}
                     alt={tech.name}
-                    fill                    // ← Remplit le parent
+                    fill // ← Remplit le parent
                     className="object-contain" // ← Garde aspect ratio
-                    sizes={`${width}px`}    // ← Hint pour optimization
+                    sizes={`${width}px`} // ← Hint pour optimization
                   />
                 </div>
               </div>

@@ -14,7 +14,14 @@ import Q7Confirmation from './questions/Q7Confirmation';
 import Q2TechNature from './questions/tech/Q2TechNature';
 import Q4TechContact from './questions/tech/Q4TechContact';
 import Q2ConseilContact from './questions/conseil/Q2ConseilContact';
-import { QuestionnaireState, ProjectType, Branch, Timeline, ContactData, Budget } from '@/lib/questionnaire/types';
+import {
+  QuestionnaireState,
+  ProjectType,
+  Branch,
+  Timeline,
+  ContactData,
+  Budget,
+} from '@/lib/questionnaire/types';
 import { calculateEstimation } from '@/lib/questionnaire/estimation';
 import { submitQuestionnaire } from '@/actions/questionnaire';
 import { cn } from '@/lib/utils';
@@ -30,7 +37,6 @@ interface QuestionnaireModalProps {
 }
 
 export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireModalProps) {
-
   const contentRef = useRef<HTMLDivElement>(null);
   const [showConfirmExit, setShowConfirmExit] = useState(false);
   const [state, setState] = useState<QuestionnaireState>({
@@ -45,7 +51,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
     contact: null,
     currentStep: 0,
     totalSteps: 7,
-    startedAt: new Date()
+    startedAt: new Date(),
   });
 
   // ✅ Charge preset au mount du modal
@@ -60,7 +66,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
           ...prev,
           ...preset,
           currentStep: preset.currentStep || 0,
-          startedAt: new Date()
+          startedAt: new Date(),
         }));
         sessionStorage.removeItem('questionnaire-preset');
       } catch (error) {
@@ -74,7 +80,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
     if (contentRef.current) {
       contentRef.current.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   }, [state.currentStep]);
@@ -103,7 +109,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
         handleClose();
       }
     };
-    
+
     window.addEventListener('keydown', handleEscape);
     return () => window.removeEventListener('keydown', handleEscape);
   }, [isOpen, handleClose]);
@@ -134,7 +140,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
       projectType,
       branch,
       currentStep: 2,
-      totalSteps: branch === 'tech' ? 5 : branch === 'conseil' ? 3 : 7
+      totalSteps: branch === 'tech' ? 5 : branch === 'conseil' ? 3 : 7,
     }));
   }, []);
 
@@ -162,26 +168,29 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
     setState(prev => ({ ...prev, budget }));
   }, []);
 
-  const handleQ6Submit = useCallback(async (contact: ContactData) => {
-    setState(prev => ({ ...prev, contact, completedAt: new Date() }));
+  const handleQ6Submit = useCallback(
+    async (contact: ContactData) => {
+      setState(prev => ({ ...prev, contact, completedAt: new Date() }));
 
-    try {
-      await submitQuestionnaire({
-        ...state,
-        contact,
-        branch: state.branch!
-      } as QuestionnaireSubmitData);
+      try {
+        await submitQuestionnaire({
+          ...state,
+          contact,
+          branch: state.branch!,
+        } as QuestionnaireSubmitData);
 
-      // Passe au step confirmation au lieu de redirect
-      setState(prev => ({ 
-        ...prev, 
-        currentStep: prev.totalSteps 
-      }));
-    } catch (error) {
-      console.error('Erreur submission:', error);
-      toast.error('Une erreur est survenue. Veuillez réessayer.');
-    }
-  }, [state]);
+        // Passe au step confirmation au lieu de redirect
+        setState(prev => ({
+          ...prev,
+          currentStep: prev.totalSteps,
+        }));
+      } catch (error) {
+        console.error('Erreur submission:', error);
+        toast.error('Une erreur est survenue. Veuillez réessayer.');
+      }
+    },
+    [state]
+  );
 
   const handleNext = useCallback(() => {
     setState(prev => ({ ...prev, currentStep: prev.currentStep + 1 }));
@@ -191,79 +200,81 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
     setState(prev => ({ ...prev, currentStep: Math.max(0, prev.currentStep - 1) }));
   }, []);
 
-    // ============================================
+  // ============================================
   // Validation stricte
   // ============================================
   const isStepValid = useCallback((): boolean => {
-  // Step 0 (intro) : pas de validation
-  if (state.currentStep === 0) return false;
+    // Step 0 (intro) : pas de validation
+    if (state.currentStep === 0) return false;
 
-  // TPE branch
-  if (state.branch === 'tpe') {
-    switch (state.currentStep) {
-      case 1:
-        return state.projectType !== null;
-      case 2:
-        return state.features.length > 0;
-      case 3:
-        return state.assets.length > 0;
-      case 4:
-        return state.tools.length > 0;
-      case 5:
-        return state.timeline !== null && state.budget !== null;
-      case 6:
-        return false; // Form submit
-      case 7:
-        return false; // Confirmation
-      default:
-        return false;
+    // TPE branch
+    if (state.branch === 'tpe') {
+      switch (state.currentStep) {
+        case 1:
+          return state.projectType !== null;
+        case 2:
+          return state.features.length > 0;
+        case 3:
+          return state.assets.length > 0;
+        case 4:
+          return state.tools.length > 0;
+        case 5:
+          return state.timeline !== null && state.budget !== null;
+        case 6:
+          return false; // Form submit
+        case 7:
+          return false; // Confirmation
+        default:
+          return false;
+      }
     }
-  }
-  
-  // Tech branch
-  if (state.branch === 'tech') {
-    switch (state.currentStep) {
-      case 1:
-        return state.projectType !== null;
-      case 2:
-        return state.techNature !== undefined && state.techNature !== null && state.techNature !== '';
-      case 3:
-        return state.timeline !== null && state.budget !== null;
-      case 4:
-        return false; // Form submit
-      case 5:
-        return false; // Confirmation
-      default:
-        return false;
+
+    // Tech branch
+    if (state.branch === 'tech') {
+      switch (state.currentStep) {
+        case 1:
+          return state.projectType !== null;
+        case 2:
+          return (
+            state.techNature !== undefined && state.techNature !== null && state.techNature !== ''
+          );
+        case 3:
+          return state.timeline !== null && state.budget !== null;
+        case 4:
+          return false; // Form submit
+        case 5:
+          return false; // Confirmation
+        default:
+          return false;
+      }
     }
-  }
-  
-  // Conseil branch
-  if (state.branch === 'conseil') {
-    switch (state.currentStep) {
-      case 1:
-        return state.projectType !== null;
-      case 2:
-        return false; // Form submit
-      case 3:
-        return false; // Confirmation
-      default:
-        return false;
+
+    // Conseil branch
+    if (state.branch === 'conseil') {
+      switch (state.currentStep) {
+        case 1:
+          return state.projectType !== null;
+        case 2:
+          return false; // Form submit
+        case 3:
+          return false; // Confirmation
+        default:
+          return false;
+      }
     }
-  }
-  
-  return false;
-}, [
-  state.currentStep,
-  state.branch,
-  state.projectType,
-  state.features.length,
-  state.assets.length,
-  state.tools.length,
-  state.timeline,
-  state.budget,
-  state.techNature
-]);
+
+    return false;
+  }, [
+    state.currentStep,
+    state.branch,
+    state.projectType,
+    state.features.length,
+    state.assets.length,
+    state.tools.length,
+    state.timeline,
+    state.budget,
+    state.techNature,
+  ]);
 
   // Navigation avec Enter
   useEffect(() => {
@@ -284,25 +295,23 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
 
     window.addEventListener('keydown', handleEnter);
     return () => window.removeEventListener('keydown', handleEnter);
-  }, [isOpen, state.currentStep, isStepValid, state, handleNext, handleIntroStart,]);
+  }, [isOpen, state.currentStep, isStepValid, state, handleNext, handleIntroStart]);
 
-  const estimation = state.currentStep === 6 && state.branch === 'tpe' && state.projectType
-    ? calculateEstimation(state)
-    : null;
+  const estimation =
+    state.currentStep === 6 && state.branch === 'tpe' && state.projectType
+      ? calculateEstimation(state)
+      : null;
 
   if (!isOpen) return null;
-
-
-  
 
   // Détermine si on affiche le footer
   const shouldShowFooter = (): boolean => {
     // Pas de footer sur step 0 (intro)
     if (state.currentStep === 0) return false;
-    
+
     // Pas de footer sur step confirmation finale
     if (state.currentStep === state.totalSteps) return false;
-    
+
     // Pas de footer sur pages avec form de contact
     if (
       (state.branch === 'conseil' && state.currentStep === 2) ||
@@ -311,31 +320,30 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
     ) {
       return false;
     }
-    
+
     return true;
   };
 
   return (
     <>
       {/* Overlay - Click = ferme */}
-      <div 
+      <div
         className="fixed inset-0 bg-neutral-900/80 backdrop-blur-sm z-50"
         onClick={handleClose}
       />
 
       {/* Container centré */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-        
         {/* Modal */}
-        <div 
+        <div
           className="w-full max-w-4xl max-h-[95vh] bg-white rounded-2xl shadow-2xl overflow-hidden pointer-events-auto animate-in zoom-in-95 fade-in duration-300"
-          onClick={(e) => e.stopPropagation()}
+          onClick={e => e.stopPropagation()}
         >
           {/* Header avec progress + close - Masqué sur Step 0 */}
           {state.currentStep > 0 && state.currentStep < state.totalSteps && (
             <div className="sticky top-0 z-10 bg-white border-b border-neutral-200">
               <div className="h-1 bg-neutral-200">
-                <div 
+                <div
                   className="h-full bg-neutral-900 transition-all duration-500"
                   style={{ width: `${(state.currentStep / state.totalSteps) * 100}%` }}
                 />
@@ -374,16 +382,11 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
             className="overflow-y-auto max-h-[calc(95vh-140px)] px-4 sm:px-8 lg:px-12 py-6 lg:py-8"
           >
             {/* Q0 - Intro */}
-            {state.currentStep === 0 && (
-              <Q0Intro onStart={handleIntroStart} />
-            )}
+            {state.currentStep === 0 && <Q0Intro onStart={handleIntroStart} />}
 
             {/* Q1 - Type de projet (TOUTES branches) */}
             {state.currentStep === 1 && (
-              <Q1TypeProject
-                value={state.projectType}
-                onNext={handleQ1Next}
-              />
+              <Q1TypeProject value={state.projectType} onNext={handleQ1Next} />
             )}
 
             {/* ========== BRANCH TPE ========== */}
@@ -396,17 +399,11 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
             )}
 
             {state.currentStep === 3 && state.branch === 'tpe' && (
-              <Q3Assets
-                value={state.assets}
-                onChange={handleQ3AssetsChange}
-              />
+              <Q3Assets value={state.assets} onChange={handleQ3AssetsChange} />
             )}
 
             {state.currentStep === 4 && state.branch === 'tpe' && (
-              <Q4Tools
-                value={state.tools}
-                onChange={handleQ4ToolsChange}
-              />
+              <Q4Tools value={state.tools} onChange={handleQ4ToolsChange} />
             )}
 
             {state.currentStep === 5 && state.branch === 'tpe' && (
@@ -420,10 +417,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
             )}
 
             {state.currentStep === 6 && state.branch === 'tpe' && estimation && (
-              <Q6Estimation
-                estimation={estimation}
-                onSubmit={handleQ6Submit}
-              />
+              <Q6Estimation estimation={estimation} onSubmit={handleQ6Submit} />
             )}
 
             {/* Q7 - Confirmation TPE */}
@@ -437,10 +431,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
 
             {/* ========== BRANCH TECH ========== */}
             {state.currentStep === 2 && state.branch === 'tech' && (
-              <Q2TechNature
-                value={state.techNature || null}
-                onChange={handleTechNatureChange}
-              />
+              <Q2TechNature value={state.techNature || null} onChange={handleTechNatureChange} />
             )}
 
             {state.currentStep === 3 && state.branch === 'tech' && (
@@ -470,7 +461,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
             {state.currentStep === 2 && state.branch === 'conseil' && (
               <Q2ConseilContact
                 objectives={state.conseilObjectives || []}
-                onObjectivesChange={(obj) => setState(prev => ({ ...prev, conseilObjectives: obj }))}
+                onObjectivesChange={obj => setState(prev => ({ ...prev, conseilObjectives: obj }))}
                 onSubmit={handleQ6Submit}
               />
             )}
@@ -500,10 +491,10 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
                   onClick={handleNext}
                   disabled={!isStepValid()}
                   className={cn(
-                    "px-4 sm:px-6 py-2 rounded-lg font-medium transition-all text-md sm:text-base",
+                    'px-4 sm:px-6 py-2 rounded-lg font-medium transition-all text-md sm:text-base',
                     isStepValid()
-                      ? "bg-neutral-900 text-white hover:bg-neutral-800 cursor-pointer"
-                      : "bg-neutral-200 text-neutral-400 cursor-not-allowed"
+                      ? 'bg-neutral-900 text-white hover:bg-neutral-800 cursor-pointer'
+                      : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
                   )}
                 >
                   Continuer →
@@ -513,7 +504,10 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
               {isStepValid() && (
                 <div className="mt-2 sm:mt-3 text-center">
                   <span className="text-xs text-neutral-400">
-                    Appuyez sur <kbd className="px-2 py-1 bg-neutral-100 rounded text-neutral-600 font-mono text-xs">Enter ↵</kbd>
+                    Appuyez sur{' '}
+                    <kbd className="px-2 py-1 bg-neutral-100 rounded text-neutral-600 font-mono text-xs">
+                      Enter ↵
+                    </kbd>
                   </span>
                 </div>
               )}
@@ -523,15 +517,15 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
           {/* ✅ Modal de confirmation exit */}
           {showConfirmExit && (
             <>
-              <div 
+              <div
                 className="fixed inset-0 bg-black/60 z-[60] animate-in fade-in duration-200"
                 onClick={cancelExit}
               />
 
               <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 pointer-events-none">
-                <div 
+                <div
                   className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 pointer-events-auto animate-in zoom-in-95 fade-in duration-200"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={e => e.stopPropagation()}
                 >
                   <div className="flex items-start gap-4 mb-4">
                     <div className="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">

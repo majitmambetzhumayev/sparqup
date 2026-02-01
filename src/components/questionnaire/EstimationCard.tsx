@@ -18,7 +18,8 @@ export default function EstimationCard({ estimation }: EstimationCardProps) {
           💰 Budget estimé
         </div>
         <div className="text-4xl font-bold text-neutral-950">
-          {minBudget.toLocaleString()} € - {maxBudget.toLocaleString()} € <span className="text-2xl text-neutral-600">HT</span>
+          {minBudget.toLocaleString()} € - {maxBudget.toLocaleString()} €{' '}
+          <span className="text-2xl text-neutral-600">HT</span>
         </div>
       </div>
 
@@ -45,11 +46,7 @@ export default function EstimationCard({ estimation }: EstimationCardProps) {
             </li>
           ))}
         </ul>
-        {recurringCosts && (
-          <p className="text-sm text-neutral-600 mt-3">
-            💡 {recurringCosts}
-          </p>
-        )}
+        {recurringCosts && <p className="text-sm text-neutral-600 mt-3">💡 {recurringCosts}</p>}
       </div>
 
       <div className="h-px bg-neutral-300 my-6" />
@@ -62,9 +59,7 @@ export default function EstimationCard({ estimation }: EstimationCardProps) {
         <div className="text-2xl font-bold text-neutral-950">
           {minWeeks === maxWeeks ? `${minWeeks} semaines` : `${minWeeks}-${maxWeeks} semaines`}
         </div>
-        <p className="text-sm text-neutral-600 mt-1">
-          Selon disponibilité de vos assets
-        </p>
+        <p className="text-sm text-neutral-600 mt-1">Selon disponibilité de vos assets</p>
       </div>
     </div>
   );

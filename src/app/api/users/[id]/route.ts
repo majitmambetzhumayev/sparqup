@@ -3,12 +3,9 @@ import { auth } from '@/auth';
 import { sql } from '@/lib/db';
 import { NextResponse } from 'next/server';
 
-export async function PATCH(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
-  
+
   // Vérifie superuser
   if (!session || session.user.role !== 'superuser') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

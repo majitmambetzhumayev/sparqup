@@ -5,15 +5,15 @@ export const cvData: CVData = {
   personal: {
     name: 'Majit Mambetzhumayev',
     title: 'Développeur Web Full Stack',
-    email: 'contact@sparqup.fr', 
-    phone: '+33 6 30 92 87 39', 
+    email: 'contact@sparqup.fr',
+    phone: '+33 6 30 92 87 39',
     location: 'Bordeaux, France',
     website: 'sparqup.fr',
     github: 'https://github.com/majitmambetzhumayev',
-    linkedin: 'https://www.linkedin.com/in/majit-mambetzhumayev-95b4273a7/'
+    linkedin: 'https://www.linkedin.com/in/majit-mambetzhumayev-95b4273a7/',
   },
   summary:
-    'Développeur web full stack orienté front, autodidacte, avec une forte appétence produit et automatisation. Habitué à travailler sans cadre académique classique, je compense par une capacité d\'apprentissage rapide, une approche pragmatique et une mise en production régulière de projets réels.',
+    "Développeur web full stack orienté front, autodidacte, avec une forte appétence produit et automatisation. Habitué à travailler sans cadre académique classique, je compense par une capacité d'apprentissage rapide, une approche pragmatique et une mise en production régulière de projets réels.",
   experience: [
     {
       company: 'Projets freelance & produits web',
@@ -23,7 +23,7 @@ export const cvData: CVData = {
         'Plateforme de génération de leads : questionnaire interactif avec backend Next.js pour traitement et automatisation vers Notion',
         'E-commerce Umaï : customisation Shopify avec Liquid, optimisation parcours utilisateur',
         'E-learning Faceplastie : migration LMS complexe avec préservation données de +2000 utilisateurs',
-        'API REST d\'ingestion de leads depuis plateformes externes (Malt, Codeur.com)',
+        "API REST d'ingestion de leads depuis plateformes externes (Malt, Codeur.com)",
       ],
     },
     {

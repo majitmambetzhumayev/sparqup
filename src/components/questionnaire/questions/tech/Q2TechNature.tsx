@@ -23,15 +23,11 @@ export default function Q2TechNature({ value, onChange }: Q2TechNatureProps) {
     id: opt.id,
     label: opt.label,
     description: opt.description,
-    icon: <span className="text-4xl">{opt.icon}</span>
+    icon: <span className="text-4xl">{opt.icon}</span>,
   }));
 
   return (
-    <QuestionCard
-      title="Quel type de projet technique ?"
-      width="narrow"
-      spacing="compact"
-    >
+    <QuestionCard title="Quel type de projet technique ?" width="narrow" spacing="compact">
       <RadioGroup
         options={options}
         value={selectedNature}
