@@ -2,42 +2,42 @@
 
 > Modern lead generation and management system for web development consultancy
 
-## 🚀 Overview
+## Overview
 
 SparqUp is a full-stack lead management platform built with Next.js, featuring automated lead capture, user management, and seamless Notion integration for CRM workflows.
 
 **Live:** [sparqup.fr](https://sparqup.fr) (or sparqup.vercel.app)
 
-## ✨ Features
+## Features
 
 ### Lead Management
 
-- 📝 Multi-step lead qualification questionnaire
-- 🎯 Budget and service categorization
-- 📊 Real-time lead dashboard with statistics
-- 🔍 Advanced filtering and search
-- ✅ Lead status tracking (new → contacted → qualified → converted)
+-  Multi-step lead qualification questionnaire
+-  Budget and service categorization
+-  Real-time lead dashboard with statistics
+-  Advanced filtering and search
+-  Lead status tracking (new → contacted → qualified → converted)
 
 ### User Management
 
-- 👥 Role-based access control (Superuser, Admin, Viewer)
-- 🔐 Secure authentication with NextAuth.js v5
-- 🛡️ Protected API routes with middleware
-- 📋 User administration dashboard (superuser only)
+-  Role-based access control (Superuser, Admin, Viewer)
+-  Secure authentication with NextAuth.js v5
+-  Protected API routes with middleware
+-  User administration dashboard (superuser only)
 
 ### Notion Integration
 
-- 🔄 Automated lead sync to Notion database
-- ⚡ GitHub Actions cron job (every 15 minutes)
-- 🛡️ Rate limit protection
-- 📊 Batch processing for efficiency
+-  Automated lead sync to Notion database
+-  GitHub Actions cron job (every 15 minutes)
+-  Rate limit protection
+-  Batch processing for efficiency
 
 ### Analytics
 
-- 📈 Umami Analytics integration (production only)
-- 🎯 Privacy-focused tracking
+-  Umami Analytics integration (production only)
+-  Privacy-focused tracking
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 
@@ -68,7 +68,7 @@ SparqUp is a full-stack lead management platform built with Next.js, featuring a
 - **Notion API:** @notionhq/client
 - **Analytics:** Umami
 
-## 📦 Installation
+##  Installation
 
 ### Prerequisites
 
@@ -166,7 +166,7 @@ pnpm dev
 
 Visit [http://localhost:3000](http://localhost:3000)
 
-## 🔄 Notion Sync Setup
+##  Notion Sync Setup
 
 ### 1. Create Notion Integration
 
@@ -212,7 +212,7 @@ Add secrets in **GitHub Settings** → **Secrets and variables** → **Actions**
 - `SYNC_URL`: `https://sparqup.vercel.app/api/cron/sync-notion`
 - `CRON_SECRET`: Same as in Vercel env vars
 
-## 🚢 Deployment
+##  Deployment
 
 ### Vercel Deployment
 
@@ -235,7 +235,7 @@ Automatically runs every 15 minutes to sync leads to Notion.
 
 Check logs: **GitHub** → **Actions** → **Sync Notion**
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 sparqup/
@@ -275,17 +275,17 @@ sparqup/
 └── README.md
 ```
 
-## 🔐 Security
+##  Security
 
-- ✅ NextAuth.js v5 with secure session handling
-- ✅ Role-based access control (RBAC)
-- ✅ Protected API routes with middleware
-- ✅ Bcrypt password hashing
-- ✅ CRON endpoint protection with bearer token
-- ✅ SQL injection protection (parameterized queries)
-- ✅ Environment variables for secrets
+- NextAuth.js v5 with secure session handling
+- Role-based access control (RBAC)
+- Protected API routes with middleware
+- Bcrypt password hashing
+- CRON endpoint protection with bearer token
+- SQL injection protection (parameterized queries)
+- Environment variables for secrets
 
-## 🧪 Development
+## Development
 
 ### Commands
 
@@ -314,14 +314,14 @@ curl -X GET http://localhost:3000/api/cron/sync-notion \
   -H "Authorization: Bearer YOUR_CRON_SECRET"
 ```
 
-## 📊 Monitoring
+## Monitoring
 
 - **Vercel Analytics:** Built-in performance monitoring
 - **Umami Analytics:** Privacy-focused web analytics (production only)
 - **GitHub Actions:** Cron job execution logs
 - **Vercel Logs:** Real-time function logs
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Notion Sync Errors
 
@@ -342,11 +342,11 @@ curl -X GET http://localhost:3000/api/cron/sync-notion \
 **Session not persisting**
 → Check `AUTH_SECRET` is set in environment variables
 
-## 📝 License
+## License
 
 Private - © 2025 SparqUp
 
-## 👤 Author
+## Author
 
 **Majit Mambetzhumayev**
 
@@ -355,4 +355,4 @@ Private - © 2025 SparqUp
 
 ---
 
-**Built with ❤️ for modern lead management**
+**Built for modern lead management**
